@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -14,7 +14,54 @@
     <header th:replace="~{index :: header}"></header>
     <nav th:replace="~{index :: nav}"></nav>
     <main>
+        <div class="title">
+            <h3>Profile</h3>
+        </div>
 
+        <div class="content">
+            <div class="profile">
+                <div class="wrap">
+                    <div class="label">Name</div>
+                    <div>Boby widjaya</div>
+                </div>
+
+                <div class="wrap">
+                    <div class="label">Role</div>
+                    <div>Buyer</div>
+                </div>
+
+                <div class="wrap">
+                    <div class="label">Address</div>
+                    <div>Green ville Block AY 4, Kebon Jeruk</div>
+                </div>
+
+                <div class="wrap">
+                    <div class="label">Balance</div>
+                    <div class="wrap-balance">
+                        <div>Rp. <span>250.000,00</span></div>
+<!--                        <div sec:authorize="hasRole('ROLE_BUYER')">-->
+<!--                            <a class="button" href="#">Tambah Dana</a>-->
+<!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="transaction">
+                <h3>My Transaction History</h3>
+                <table>
+                    <thead>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Shipment</th>
+                    <th>Total Price</th>
+                    </thead>
+                    <tr>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </main>
 
 </div>

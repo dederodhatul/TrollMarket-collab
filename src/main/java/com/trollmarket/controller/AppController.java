@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/profile")
-public class HomeController {
+public class AppController {
 
-    @GetMapping()
+    @GetMapping("/index")
     public String welcome(){
 
         return "profile";
