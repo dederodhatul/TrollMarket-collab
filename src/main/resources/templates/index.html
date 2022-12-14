@@ -17,8 +17,7 @@
 
     <div class="right">
       <h3>Welcome, <span>Username</span>
-        <form th:attr="action=@{/logout}" method="POST">
-          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <form th:action="@{/logout}" method="POST">
           <button type="submit"><i class="button"></i></button>
         </form>
       </h3>

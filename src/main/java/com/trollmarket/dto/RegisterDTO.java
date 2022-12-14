@@ -4,6 +4,9 @@ import javax.validation.constraints.NotBlank;
 
 public class RegisterDTO {
 
+
+    private Long id;
+
     @NotBlank(message = "Username is required")
     private String username;
 
@@ -16,7 +19,46 @@ public class RegisterDTO {
     @NotBlank(message = "role is required")
     private String role;
 
+    @NotBlank(message = "First Name is required")
+    private String firstName;
+
+    private String lastName;
+
+    private String address;
+
     public RegisterDTO(){}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public String getUsername() {
         return username;
