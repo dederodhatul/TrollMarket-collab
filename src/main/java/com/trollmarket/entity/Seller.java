@@ -30,6 +30,15 @@ public class Seller {
 
     public Seller(){}
 
+    public Seller(Long id, String firstName, String lastName, String address, BigDecimal balance, Account account) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.balance = balance;
+        this.account = account;
+    }
+
     public Long getId() {
         return id;
     }

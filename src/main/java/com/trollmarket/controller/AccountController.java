@@ -3,6 +3,8 @@ package com.trollmarket.controller;
 import com.trollmarket.dto.RegisterDTO;
 import com.trollmarket.entity.Account;
 import com.trollmarket.service.AccountService;
+import com.trollmarket.service.BuyerService;
+import com.trollmarket.service.SellerService;
 import com.trollmarket.utility.Dropdown;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,12 @@ public class AccountController {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private BuyerService buyerService;
+
+    @Autowired
+    private SellerService sellerService;
 
     @GetMapping("loginForm")
     public String loginForm(Model model){
@@ -44,7 +52,11 @@ public class AccountController {
     }
     @PostMapping("/register")
     public String register(@Valid @ModelAttribute("account") RegisterDTO registerDTO,Model model){
-        accountService.registerAccount(registerDTO);
+        if(registerDTO.getRole().toLowerCase().equals("buyer")){
+            buyerService.save(registerDTO);
+        }else{
+            sellerService.save(registerDTO);
+        }
         return "redirect:/account/loginForm";
     }
 }
