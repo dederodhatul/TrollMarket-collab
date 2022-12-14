@@ -1,10 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-$END$
+
+<div class="container">
+    <header th:replace="~{index :: header}"></header>
+    <nav th:replace="~{index :: nav}"></nav>
+    <br>
+    <br>
+    <main>
+        <form method="POST" th:action="@{/buyer/addProduct}">
+
+            <div class="wrap">
+                <label>Name</label>
+                <input type="text">
+            </div>
+
+            <div class="wrap">
+                <label>Category</label>
+                <input type="text">
+            </div>
+
+            <div class="wrap">
+                <label>Description</label>
+                <textarea></textarea>
+            </div>
+
+            <div class="wrap">
+                <label>Price</label>
+                <input type="number">
+            </div>
+
+            <div class="wrap">
+                <label>Discontinue</label>
+                <input type="checkbox">
+            </div>
+            
+                <input type="submit" value="Save">
+                <a th:href="@{/page/merchandise}">Cancel</a>
+            </div>
+
+        </form>
+
+    </main>
+</div>
+
 </body>
 </html>

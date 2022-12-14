@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/normalize.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script type="text/javascript" defer th:src="@{/js/shop.js}"></script>
 </head>
 <body>
 
@@ -35,7 +36,7 @@
                             <label>Category</label>
                         </div>
                         <div>
-                            input type="text">
+                            <input type="text">
                         </div>
                     </div>
 
@@ -47,22 +48,87 @@
                             <textarea></textarea>
                         </div>
                     </div>
-
-                    <input type="submit" value="Search">
+                    <div class="search-btn">
+                        <input type="submit" value="Search">
+                    </div>
                 </form>
             </div>
 
+            <div class="form-addProduct">
+                <form>
+                    <div class="wrap popup">
+                        <div class="label">
+                            <label>Quantity</label>
+                        </div>
+                        <div>
+                            <input type="number">
+                        </div>
+                    </div>
+
+                    <div class="wrap popup">
+                        <div class="label">
+                            <label>Shipment</label>
+                        </div>
+                        <div>
+                            <select>
+                                <option value="null">Choose Shipment</option>
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <input type="submit" value="Tambah ke Keranjang">
+                        <a th:href="@{/page/shop}" class="button">Batal</a>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="popup-detail-product">
+                <div class="wrap popup">
+                    <div class="label">Name</div>
+                    <div>Laptop Lenovo E420</div>
+                </div>
+                <div class="wrap popup">
+                    <div class="label">Category</div>
+                    <div>Laptop</div>
+                </div>
+                <div class="wrap popup">
+                    <div class="label">Description</div>
+                    <div>Laptop Lenovo E420</div>
+                </div>
+                <div class="wrap popup">
+                    <div class="label">Price</div>
+                    <div Rp.><span>9.000.000,00</span></div>
+                </div>
+                <div class="wrap popup">
+                    <div class="label">Seller Name</div>
+                    <div>Lenovo</div>
+                </div>
+
+                <div class="btn">
+                    <a th:href="@{/page/shop}">Close</a>
+                </div>
+            </div>
             <div class="transaction">
                 <table>
                     <thead>
-                    <th></th>
+                    <th class="col-action"></th>
                     <th>Name</th>
                     <th>Price</th>
                     </thead>
                     <tr>
                         <td>
-                            <a>Add To Cart</a>
-                            <a>Detail Info</a>
+                            <div class="action">
+                                <div class="add-product btn-act">
+                                    <a href="#" class="btn-action ">Add To Cart</a>
+                                </div>
+
+                                <div class="detail-product btn-act">
+                                    <a href="#" class="btn-action">Detail Info</a>
+                                </div>
+                            </div>
                         </td>
                         <td></td>
                         <td></td>
@@ -71,7 +137,6 @@
             </div>
         </div>
     </main>
-
 </div>
 </body>
 </html>

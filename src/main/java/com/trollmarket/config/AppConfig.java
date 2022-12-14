@@ -1,2 +1,4 @@
-package com.trollmarket.config;public class AppConfig {
+package com.trollmarket.config;
+
+public class AppConfig {
 }
