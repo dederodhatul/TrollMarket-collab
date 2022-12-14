@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script type="text/javascript" defer th:src="@{/js/merchandise.js}"></script>
+</head>
+<body>
+
+<header th:replace="~{index :: header}"></header>
+<nav th:replace="~{index :: nav}"></nav>
+
+<main>
+
+    <div class="title">
+        <h3>Profile</h3>
+    </div>
+
+    <div class="content">
+        <table>
+            <a th:href="@{/seller/formAddProduct}" class="button add">Add New Product</a>
+            <thead>
+            <th></th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Discontinue</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <a href="#">Edit</a>
+                    <a href="#">Delete</a>
+                    <a href="#" class="info">Info</a>
+                    <a href="#">Discontinue</a>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="form-info">
+            <div class="wrap popup">
+                <div class="label">Name</div>
+                <div>Laptop Lenovo E420</div>
+            </div>
+            <div class="wrap popup">
+                <div class="label">Category</div>
+                <div>Laptop</div>
+            </div>
+            <div class="wrap popup">
+                <div class="label">Description</div>
+                <div>Laptop Lenovo E420</div>
+            </div>
+            <div class="wrap popup">
+                <div class="label">Price</div>
+                <div Rp.><span>9.000.000,00</span></div>
+            </div>
+            <div class="wrap popup">
+                <div class="label">Discontinue</div>
+                <div>No</div>
+            </div>
+
+            <div class="btn">
+                <a th:href="@{/page/merchandise}">Close</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

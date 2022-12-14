@@ -20,7 +20,6 @@ public class ApplicationUserDetails implements UserDetails {
         this.authorities.add(new SimpleGrantedAuthority(account.getRole()));
     }
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.authorities;

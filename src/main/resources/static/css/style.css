@@ -29,6 +29,7 @@ a{
     border: 1px solid black;
     padding: 20px;
     height: 200px;
+    position: relative;
 }
 
 .title{
@@ -39,6 +40,7 @@ a{
     display: flex;
     width: 400px;
     justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .label{
@@ -61,8 +63,79 @@ table th{
      border-right: solid 1px #8495d9;
 }
 
-.transaction h3{
+h3{
     text-align: left;
 }
+
+.search-btn{
+    text-align: center;
+    width: 750px;
+}
+
+.btn-action{
+    font-size : 13px;
+    background-color: grey;
+    margin-top: 7px;
+}
+
+.popup {
+    width: 250px;
+}
+
+.form-addProduct{
+    width: 300px;
+    border: 1px solid black;
+    position: absolute;
+    top: 20px;
+    left: 400px;
+    background-color: white;
+    height: 110px;
+    padding-top: 20px;
+    visibility: hidden;
+}
+
+.popup-detail-product{
+    border: 1px solid black;
+    background-color: white;
+    position: absolute;
+    top: 5px;
+    left: 400px;
+    padding: 3px;
+    visibility : hidden;
+}
+
+.col-action {
+    width: 150px;
+}
+
+.action{
+    display: flex;
+    border: 1px solid black;
+    action: 100px;
+}
+
+.btn-act{
+    margin-left: 5px;
+}
+
+.form-info{
+    border: 1px solid black;
+    position: absolute;
+    background-color: white;
+    top: 0;
+    left: 400px;
+    visibility: hidden;
+}
+
+.add{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.content{
+    border-top: none;
+}
+
+
 
 
