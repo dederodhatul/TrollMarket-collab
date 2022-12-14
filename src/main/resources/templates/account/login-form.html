@@ -13,10 +13,10 @@
   <div class="container-flex-center">
     <div class="form-content">
       <h1>LOG IN</h1>
-      <form th:action="@{/authenticateTheUser}" method="post">
+      <form th:action="@{/authenticating}" method="post">
         <!-- Check for login error -->
-        <div th:if="${param.error}" class="error">
-          Invalid username and password
+        <div th:if="${param.error}" class="error" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION}==null ? '' : ${session.SPRING_SECURITY_LAST_EXCEPTION.message}">
+<!--          Invalid username and password-->
         </div>
 
         <!-- Check for logout -->
@@ -33,9 +33,15 @@
           <label>Password</label>
           <input type="password" name="password" placeholder="password" />
         </div>
-
         <div>
-          <a class="btn" th:href="@{/account/registerForm}">Register</a>
+          <select name="role">
+            <option th:each="option : ${role}" th:value="${option.stringValue}"
+                    th:text="${option.text}"/>
+          </select>
+        </div>
+        <div>
+          <a class="btn" th:href="@{/account/registerForm(role='Buyer')}">Register as Buyer</a>
+          <a class="btn" th:href="@{/account/registerForm(role='Seller')}">Register as Seller</a>
         </div>
         <div>
           <button class="btn" type="submit">Login</button>
