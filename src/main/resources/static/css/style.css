@@ -1,0 +1,68 @@
+.container{
+    margin: auto;
+    width: 1100px;
+    margin-top: 20px;
+}
+
+header,
+ nav{
+    display: flex;
+    border: 1px solid black;
+    justify-content : space-between;
+    padding: 10px;
+}
+
+.button{
+    padding: 5px;
+    border-radius: 2px;
+    background-color: grey;
+}
+
+a{
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.content{
+    text-align : center;
+    border: 1px solid black;
+    padding: 20px;
+    height: 200px;
+}
+
+.title{
+    border: 1px solid black;
+}
+
+.wrap{
+    display: flex;
+    width: 400px;
+    justify-content: space-between;
+}
+
+.label{
+    margin-right: 20px;
+}
+
+table{
+     margin-top: 10px;
+     border-collapse: collapse;
+     width: 100%;
+     background-color: #f1f2f6;
+}
+
+table th{
+     background-color: grey;
+     color: #f1f2f6;
+     text-transform: uppercase;
+     padding: 15px;
+     text-align: left;
+     border-right: solid 1px #8495d9;
+}
+
+.transaction h3{
+    text-align: left;
+}
+
+
