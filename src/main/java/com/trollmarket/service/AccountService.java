@@ -1,2 +1,4 @@
-package com.trollmarket.service;public interface AccountService {
+package com.trollmarket.service;
+
+public interface AccountService {
 }

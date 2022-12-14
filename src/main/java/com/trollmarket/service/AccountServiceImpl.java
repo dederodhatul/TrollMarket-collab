@@ -1,2 +1,5 @@
-package com.trollmarket.service;public class AccountServiceImpl {
+package com.trollmarket.service;
+
+public class AccountServiceImpl implements AccountService{
+
 }
