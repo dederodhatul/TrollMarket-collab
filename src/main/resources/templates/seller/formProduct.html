@@ -14,31 +14,31 @@
     <br>
     <br>
     <main>
-        <form method="POST" th:action="@{/buyer/addProduct}">
+        <form method="POST" th:action="@{/seller/addProduct}" th:object="${product}">
 
             <div class="wrap">
                 <label>Name</label>
-                <input type="text">
+                <input type="text" th:field="*{name}">
             </div>
 
             <div class="wrap">
                 <label>Category</label>
-                <input type="text">
+                <input type="text" th:field="*{category}">
             </div>
 
             <div class="wrap">
                 <label>Description</label>
-                <textarea></textarea>
+                <textarea th:field="*{description}"></textarea>
             </div>
 
             <div class="wrap">
                 <label>Price</label>
-                <input type="number">
+                <input type="number" th:field="*{price}">
             </div>
 
             <div class="wrap">
                 <label>Discontinue</label>
-                <input type="checkbox">
+                <input type="checkbox" th:field="*{discontinue}">
             </div>
             
                 <input type="submit" value="Save">

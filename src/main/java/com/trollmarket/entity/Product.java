@@ -22,7 +22,6 @@ public class Product {
     @Column(name = "Category")
     private String category;
 
-
     @Column(name = "Description")
     private String description;
 
@@ -33,6 +32,25 @@ public class Product {
     private Boolean discontinue;
 
     public Product(){}
+
+    public Product(Long id, Seller seller, String name, String category, String description, BigDecimal price, Boolean discontinue) {
+        this.id = id;
+        this.seller = seller;
+        this.name = name;
+        this.category = category;
+        this.description = description;
+        this.price = price;
+        this.discontinue = discontinue;
+    }
+
+    public Product(Long id, String name, String category, String description, BigDecimal price, Boolean discontinue) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.description = description;
+        this.price = price;
+        this.discontinue = discontinue;
+    }
 
     public Long getId() {
         return id;

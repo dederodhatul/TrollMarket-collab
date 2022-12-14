@@ -28,7 +28,7 @@ public class AccountController {
 
     @GetMapping("/registerForm")
     public String registerForm(@RequestParam String role, Model model){
-        if(role.toLowerCase() == "buyer"){
+        if(role.toLowerCase().equals("buyer")){
             RegisterDTO buyerAccount = new RegisterDTO();
             buyerAccount.setRole("Buyer");
             model.addAttribute("role",role);
