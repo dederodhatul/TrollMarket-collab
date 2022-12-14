@@ -6,6 +6,7 @@ import com.trollmarket.dto.RegisterDTO;
 import com.trollmarket.entity.Account;
 import com.trollmarket.entity.Buyer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -18,9 +19,14 @@ public class BuyerServiceImpl implements BuyerService {
 
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public void save(RegisterDTO registerDTO) {
-        Account account = new Account(registerDTO.getUsername(), registerDTO.getPassword(),
+        String hashPassword = passwordEncoder.encode(registerDTO.getPassword());
+        Account account = new Account(registerDTO.getUsername(), hashPassword,
                 registerDTO.getRole());
         Buyer buyer = new Buyer(registerDTO.getId(),
                 registerDTO.getFirstName(),
