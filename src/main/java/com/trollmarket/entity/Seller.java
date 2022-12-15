@@ -86,4 +86,8 @@ public class Seller {
     public void setAccount(Account account) {
         this.account = account;
     }
+
+    public String getFullName(){
+        return this.firstName + " " + this.lastName;
+    }
 }

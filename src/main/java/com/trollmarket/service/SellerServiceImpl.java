@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class SellerServiceImpl implements SellerService {
@@ -32,5 +33,16 @@ public class SellerServiceImpl implements SellerService {
                 registerDTO.getLastName(), registerDTO.getAddress(),
                 BigDecimal.valueOf(0),account);
         sellerRepository.save(seller);
+    }
+
+    @Override
+    public Seller findSellerByUsername(String name) {
+        System.out.println(sellerRepository.findByUsername(name));
+        return sellerRepository.findByUsername(name);
+    }
+
+    @Override
+    public List<Seller> findAllSeller() {
+        return sellerRepository.findAll();
     }
 }
