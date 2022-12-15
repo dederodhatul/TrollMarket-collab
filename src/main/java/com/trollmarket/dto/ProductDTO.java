@@ -1,5 +1,9 @@
 package com.trollmarket.dto;
 
+import com.trollmarket.validation.BigDecimalLength;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 public class ProductDTO {
@@ -7,17 +11,31 @@ public class ProductDTO {
 
     private Long sellerID;
 
+    @NotBlank(message = "name is required!")
     private String name;
 
+    @NotBlank(message = "category is required!")
     private String category;
 
     private String description;
 
+    @NotNull(message = "price is required!")
+    @BigDecimalLength(minLength = 3)
     private BigDecimal price;
 
     private Boolean discontinue;
 
     public ProductDTO(){}
+
+    public ProductDTO(Long id, Long sellerID, String name, String category, String description, BigDecimal price, Boolean discontinue) {
+        this.id = id;
+        this.sellerID = sellerID;
+        this.name = name;
+        this.category = category;
+        this.description = description;
+        this.price = price;
+        this.discontinue = discontinue;
+    }
 
     public Long getId() {
         return id;
@@ -75,5 +93,12 @@ public class ProductDTO {
         this.discontinue = discontinue;
     }
 
+    public String getStatus(){
+        if(this.discontinue == true){
+            return "Yes";
+        }else{
+            return "No";
+        }
+    }
 
 }
