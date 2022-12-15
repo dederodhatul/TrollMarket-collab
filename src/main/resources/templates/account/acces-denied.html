@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Acces Denied</title>
+  <link rel="stylesheet" th:href="@{/css/normalize.css}" />
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<main>
+  <h1>Access Denied</h1>
+  <p>Your role are not authorized to access this functionality of the system.</p>
+  <p>Contact your administrator to get more information about your role authorization.</p>
+  <div class="link-container">
+    <a th:href="@{/}">Back to landing page</a>
+  </div>
+</main>
+</body>
+</html>

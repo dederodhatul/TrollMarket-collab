@@ -1,7 +1,6 @@
 package com.trollmarket.controller;
 
-import com.trollmarket.dto.RegisterDTO;
-import com.trollmarket.entity.Account;
+import com.trollmarket.dto.account.RegisterDTO;
 import com.trollmarket.service.AccountService;
 import com.trollmarket.service.BuyerService;
 import com.trollmarket.service.SellerService;
@@ -27,11 +26,16 @@ public class AccountController {
     @Autowired
     private SellerService sellerService;
 
-    @GetMapping("loginForm")
+    @GetMapping("/loginForm")
     public String loginForm(Model model){
         List<Dropdown> role = Dropdown.getRoleDropdown();
         model.addAttribute("role",role);
         return "/account/login-form";
+    }
+
+    @GetMapping("/accesDenied")
+    public String accesDenied(){
+        return "/account/acces-denied";
     }
 
     @GetMapping("/registerForm")

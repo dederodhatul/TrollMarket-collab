@@ -18,6 +18,17 @@ header,
     background-color: grey;
 }
 
+
+.button-disable{
+    padding: 5px;
+    border-radius: 2px;
+    background-color: #cccccc;
+    opacity:0.33;
+    pointer-events:none;
+    cursor:default;
+}
+
+
 a{
     color: black;
     font-weight: bold;

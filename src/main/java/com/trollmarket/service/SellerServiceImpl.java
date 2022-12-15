@@ -2,7 +2,8 @@ package com.trollmarket.service;
 
 import com.trollmarket.dao.AccountRepository;
 import com.trollmarket.dao.SellerRepository;
-import com.trollmarket.dto.RegisterDTO;
+import com.trollmarket.dto.account.RegisterDTO;
+import com.trollmarket.dto.profile.GetProfilDTO;
 import com.trollmarket.entity.Account;
 import com.trollmarket.entity.Seller;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,10 @@ public class SellerServiceImpl implements SellerService {
     @Override
     public List<Seller> findAllSeller() {
         return sellerRepository.findAll();
+    }
+
+    @Override
+    public GetProfilDTO findProfilByUsername(String username) {
+        return sellerRepository.findProfilByUsername(username);
     }
 }

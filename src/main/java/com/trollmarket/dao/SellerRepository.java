@@ -1,5 +1,6 @@
 package com.trollmarket.dao;
 
+import com.trollmarket.dto.profile.GetProfilDTO;
 import com.trollmarket.entity.Seller;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,4 +16,14 @@ public interface SellerRepository extends JpaRepository<Seller,Long> {
             """
     )
     Seller findByUsername(@Param("username") String username);
+
+    @Query("""
+            SELECT new com.trollmarket.dto.profile.GetProfilDTO(
+            sel.firstName,sel.lastName,acc.role,sel.address,sel.balance
+            )
+            FROM Seller as sel
+            INNER JOIN sel.account as acc
+            where acc.username = :username
+            """)
+    GetProfilDTO findProfilByUsername(@Param("username") String username);
 }

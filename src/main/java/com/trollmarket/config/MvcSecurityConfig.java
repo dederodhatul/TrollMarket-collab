@@ -26,12 +26,15 @@ public class MvcSecurityConfig {
         http.authorizeRequests()
                 .antMatchers("/css/**", "/account/**").permitAll()
                 .antMatchers("/profile/**").hasAnyAuthority("Buyer","Seller")
+                .antMatchers("/merchandise/**").hasAuthority("Seller")
+                .antMatchers("/shop/**","/mycart/**").hasAuthority("Buyer")
+                .antMatchers("/shipment/**","/admin/**","/history/**").hasAuthority("Administrator")
                 .anyRequest().authenticated()
                 .and().formLogin()
                 .loginPage("/account/loginForm")
                 .loginProcessingUrl("/authenticating")// get this for free from Spring Security
                 .and().logout().permitAll()
-                .and().exceptionHandling().accessDeniedPage("/account/accessDenied");
+                .and().exceptionHandling().accessDeniedPage("/account/accesDenied");
         return http.build();
     }
 

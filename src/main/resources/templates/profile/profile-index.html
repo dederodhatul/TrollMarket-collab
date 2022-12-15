@@ -23,23 +23,23 @@
             <div class="profile">
                 <div class="wrap">
                     <div class="label">Name</div>
-                    <div>Boby widjaya</div>
+                    <div th:text="${user.getFullName()}"></div>
                 </div>
 
                 <div class="wrap">
                     <div class="label">Role</div>
-                    <div>Buyer</div>
+                    <div th:text="${user.role}"></div>
                 </div>
 
                 <div class="wrap">
                     <div class="label">Address</div>
-                    <div>Green ville Block AY 4, Kebon Jeruk</div>
+                    <div th:text="${user.address}"></div>
                 </div>
 
                 <div class="wrap">
                     <div class="label">Balance</div>
                     <div class="wrap-balance">
-                        <div>Rp. <span>250.000,00</span></div>
+                        <div><span th:text="${user.getBalanceIDR}"></span></div>
 <!--                        <div sec:authorize="hasRole('ROLE_BUYER')">-->
 <!--                            <a class="button" href="#">Tambah Dana</a>-->
 <!--                        </div>-->

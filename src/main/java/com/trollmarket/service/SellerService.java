@@ -1,8 +1,8 @@
 package com.trollmarket.service;
 
-import com.trollmarket.dto.RegisterDTO;
+import com.trollmarket.dto.account.RegisterDTO;
+import com.trollmarket.dto.profile.GetProfilDTO;
 import com.trollmarket.entity.Seller;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
@@ -12,5 +12,7 @@ public interface SellerService {
     Seller findSellerByUsername(String name);
 
     List<Seller> findAllSeller();
+
+    GetProfilDTO findProfilByUsername(String username);
 
 }

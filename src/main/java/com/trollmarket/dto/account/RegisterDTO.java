@@ -1,4 +1,4 @@
-package com.trollmarket.dto;
+package com.trollmarket.dto.account;
 
 import javax.validation.constraints.NotBlank;
 

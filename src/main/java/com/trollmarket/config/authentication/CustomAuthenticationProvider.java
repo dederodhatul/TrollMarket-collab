@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -31,11 +32,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String selectedRole = request.getParameter("role");
         UserDetails userDetails = userDetailsService.loadUserByUsername(authentication.getName());
+
         if(!passwordEncoder.matches(authentication.getCredentials().toString(), userDetails.getPassword())){
-            throw new CustomAuthenticationException("Username or Password Is invalid ");
+            throw new CustomAuthenticationException("Invalid Username or Password");
+
         }else if (passwordEncoder.matches(authentication.getCredentials().toString(), userDetails.getPassword())
                 && !selectedRole.equals(userDetails.getAuthorities().toArray()[0].toString())) {
             throw new CustomAuthenticationException("Role is Invalid");
+
         }else{
             return new UsernamePasswordAuthenticationToken(userDetails.getUsername(),userDetails.getPassword()
                     ,userDetails.getAuthorities());

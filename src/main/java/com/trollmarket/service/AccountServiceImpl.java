@@ -2,7 +2,7 @@ package com.trollmarket.service;
 
 import com.trollmarket.config.ApplicationUserDetails;
 import com.trollmarket.dao.AccountRepository;
-import com.trollmarket.dto.RegisterDTO;
+import com.trollmarket.dto.account.RegisterDTO;
 import com.trollmarket.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,7 +34,11 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Account> nullableEntity = accountRepository.findById(username);
-        Account account = nullableEntity.get();
+        Account account = accountRepository.findById(username).orElseThrow(
+                ()->{
+                    throw new UsernameNotFoundException("Invalid Username or Password");
+                }
+        );
         return new ApplicationUserDetails(account);
     }
 }
