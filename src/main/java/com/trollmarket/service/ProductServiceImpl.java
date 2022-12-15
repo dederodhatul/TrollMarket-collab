@@ -39,9 +39,13 @@ public class ProductServiceImpl implements ProductService{
                 dto.getPrice(),
                 dto.getDiscontinue()
         );
+//        if(dto.getId()!=null){
+//            product.setDiscontinue(productRepository.findById(dto.getId()).get().getDiscontinue());
+//        }
 
         productRepository.save(product);
     }
+    
 
     @Override
     public List<Product> findAllProduct() {

@@ -44,23 +44,23 @@
                     <div class="form-info" th:id="form-info- + ${i.index}">
                         <div class="wrap popup">
                             <div class="label">Product Name</div>
-                            <div th:text="${product.name}"></div>
+                            <div th:text="${product?.name}"></div>
                         </div>
                         <div class="wrap popup">
                             <div class="label">Category</div>
-                            <div th:text="${product.category}"></div>
+                            <div th:text="${product?.category}"></div>
                         </div>
                         <div class="wrap popup">
                             <div class="label">Description</div>
-                            <div th:text="${product.description}"></div>
+                            <div th:text="${product?.description}"></div>
                         </div>
                         <div class="wrap popup">
                             <div class="label">Price</div>
-                            <div Rp.><span th:text="${product.price}"></span></div>
+                            <div Rp.><span th:text="${product?.price}"></span></div>
                         </div>
                         <div class="wrap popup">
                             <div class="label">Discontinue</div>
-                            <div th:text="${product.getStatus()}">No</div>
+                            <div th:text="${product?.getStatus()}">No</div>
                         </div>
 
                         <div class="btn">

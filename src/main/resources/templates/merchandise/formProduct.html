@@ -39,9 +39,9 @@
                 <input type="number" th:field="*{price}">
             </div>
 
-            <div class="wrap" th:if="${product.id}==null">
-                <label>Discontinue</label>
-                <input type="checkbox" th:field="*{discontinue}">
+            <div class="wrap" th:hidden="${product.id}!=null">
+                <label th:hidden="${product.id}!=null">Discontinue</label>
+                <input type="checkbox" th:hidden="${product.id}!=null" th:field="*{discontinue}">
             </div>
 
             <div>
