@@ -20,7 +20,7 @@
 
     <div class="content">
         <table>
-            <a th:href="@{/seller/formAddProduct}" class="button add">Add New Product</a>
+            <a th:href="@{/merchandise/formAddProduct}" class="button add">Add New Product</a>
             <thead>
             <th></th>
             <th>Name</th>
@@ -28,15 +28,16 @@
             <th>Discontinue</th>
             </thead>
             <tbody>
-            <tr>
+            <tr th:each="product : ${products}">
                 <td>
                     <a href="#">Edit</a>
                     <a href="#">Delete</a>
                     <a href="#" class="info">Info</a>
                     <a href="#">Discontinue</a>
                 </td>
-                <td></td>
-                <td></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.category}"></td>
+                <td th:text="${product.getStatus()}"></td>
             </tr>
             </tbody>
         </table>
@@ -64,7 +65,7 @@
             </div>
 
             <div class="btn">
-                <a th:href="@{/page/merchandise}">Close</a>
+                <a th:href="@{/merchandise/index}">Close</a>
             </div>
         </div>
     </div>

@@ -1,7 +1,9 @@
 package com.trollmarket.controller;
 
 import com.trollmarket.dto.ProductDTO;
+import com.trollmarket.entity.Seller;
 import com.trollmarket.service.ProductService;
+import com.trollmarket.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -12,25 +14,40 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/seller")
-public class SellerController {
+@RequestMapping("/merchandise")
+public class MerchandiseController {
 
     @Autowired
     ProductService productService;
+
+    @Autowired
+    SellerService sellerService;
+
+    @GetMapping("/index")
+    public String merchandise(Model model){
+
+        model.addAttribute("products", productService.findAllProduct());
+
+        return "merchandise/merchandise";
+    }
 
     @GetMapping("/formAddProduct")
     public String formAddProduct(Model model){
 
         model.addAttribute("product", new ProductDTO());
-        return "seller/formProduct";
+        return "merchandise/formProduct";
     }
-
 
     @PostMapping("/addProduct")
     public String addProduct(@ModelAttribute("product") ProductDTO product, Authentication authentication){
         System.out.println("authentication : " + authentication.getName());
-//        productService.save(product);
+        Seller seller =  sellerService.findSellerByUsername(authentication.getName());
 
-        return "redirect:/page/merchandise";
+        productService.save(product, seller.getId());
+
+        return "redirect:/merchandise/index";
     }
+
+
+
 }

@@ -107,4 +107,12 @@ public class Product {
     public void setDiscontinue(Boolean discontinue) {
         this.discontinue = discontinue;
     }
+
+    public String getStatus(){
+        if(this.discontinue == true){
+            return "yes";
+        }else{
+            return "No";
+        }
+    }
 }
