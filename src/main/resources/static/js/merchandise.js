@@ -1,6 +1,13 @@
-var infoMerchand = document.querySelector(".info")
-var formInfoMerchand = document.querySelector(".form-info");
+var infoMerchand = document.querySelectorAll(".info")
 
-infoMerchand.addEventListener('click', function(){
-    formInfoMerchand.style.visibility = "visible";
+document.addEventListener('DOMContentLoaded',function(){
+   for (let i = 0; i < infoMerchand.length; i++) {
+       document.getElementById("form-info-"+i).style.visibility = "hidden";
+   }
+   for(let i = 0; i < infoMerchand.length; i++){
+       document.getElementById("btn-info-"+i).addEventListener('click', function(e){
+                  document.getElementById("form-info-"+i).style.visibility = "visible";
+              })
+   }
+
 })

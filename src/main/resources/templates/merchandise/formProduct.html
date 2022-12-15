@@ -15,14 +15,16 @@
     <br>
     <main>
         <form method="POST" th:action="@{/merchandise/addProduct}" th:object="${product}">
-
+            <input type="text" th:field="*{id}" hidden>
             <div class="wrap">
                 <label>Name</label>
+                <span th:errors="*{name}"></span>
                 <input type="text" th:field="*{name}">
             </div>
 
             <div class="wrap">
                 <label>Category</label>
+                <span th:errors="*{category}"></span>
                 <input type="text" th:field="*{category}">
             </div>
 
@@ -33,14 +35,16 @@
 
             <div class="wrap">
                 <label>Price</label>
+                <span th:errors="*{price}"></span>
                 <input type="number" th:field="*{price}">
             </div>
 
-            <div class="wrap">
+            <div class="wrap" th:if="${product.id}==null">
                 <label>Discontinue</label>
                 <input type="checkbox" th:field="*{discontinue}">
             </div>
-            
+
+            <div>
                 <input type="submit" value="Save">
                 <a th:href="@{/merchandise/index}">Cancel</a>
             </div>

@@ -110,7 +110,7 @@ public class Product {
 
     public String getStatus(){
         if(this.discontinue == true){
-            return "yes";
+            return "Yes";
         }else{
             return "No";
         }
