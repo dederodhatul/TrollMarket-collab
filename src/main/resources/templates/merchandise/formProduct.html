@@ -14,7 +14,7 @@
     <br>
     <br>
     <main>
-        <form method="POST" th:action="@{/seller/addProduct}" th:object="${product}">
+        <form method="POST" th:action="@{/merchandise/addProduct}" th:object="${product}">
 
             <div class="wrap">
                 <label>Name</label>
@@ -42,7 +42,7 @@
             </div>
             
                 <input type="submit" value="Save">
-                <a th:href="@{/page/merchandise}">Cancel</a>
+                <a th:href="@{/merchandise/index}">Cancel</a>
             </div>
 
         </form>

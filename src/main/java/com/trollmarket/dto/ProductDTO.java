@@ -1,10 +1,5 @@
 package com.trollmarket.dto;
 
-import com.trollmarket.entity.Seller;
-
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 
 public class ProductDTO {
