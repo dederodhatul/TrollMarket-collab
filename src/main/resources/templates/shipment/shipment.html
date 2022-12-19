@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+<!--    <script type="text/javascript" defer th:src="@{/js/merchandise.js}"></script>-->
+</head>
+<body>
+<div class="container">
+
+    <header th:replace="~{index :: header}"></header>
+    <nav th:replace="~{index :: nav}"></nav>
+
+    <main>
+
+        <div class="title">
+            <h3>Shipment</h3>
+        </div>
+
+        <div class="content">
+            <table>
+                <a th:href="@{/shipment/formAddShipment}" class="button add">Add New Shipment</a>
+                <thead>
+                <th></th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Service</th>
+                </thead>
+                <tbody>
+                <tr th:each="shipment: ${shipments}">
+                    <td>
+                        <a class="btn-action" th:href="@{/shipment/formEdit(id=${shipment.id})}">Edit</a>
+                        <a class="btn-action" th:href="@{/shipment/delete(id=${shipment.id})}">Delete</a>
+                        <a th:if="${shipment.getStatus()}=='Yes'" th:class="button-disable-merchandise"  th:href="@{/merchandise/discontinue(id = ${product.id})}">Discontinue</a>
+                        <a th:if="${shipment.getStatus()}=='No'" th:class="btn-action"  th:href="@{/merchandise/discontinue(id = ${product.id},page = ${currentPage})}">Discontinue</a>
+                    </td>
+                    <td th:text="${shipment?.name}"></td>
+                    <td th:text="${shipment?.price}"></td>
+                    <td th:text="${shipment?.getStatus()}"></td>
+
+                    <div class="form-popup">
+                        <form th:action="@{/profile/topup}" method="POST" th:object="${topup}">
+                            <div th:if="${hasErrors}==true" id="hasErrors"></div>
+                            <span th:errors="*{balance}"></span>
+                            <div>
+                                <label>Tambah Dana Sebesar</label>
+                            </div>
+                            <input type="number" id="topup-value" th:field="*{balance}">
+                            <div class="button-form-popup">
+                                <button class="button" type="submit">Tambah</button>
+                                <a class="button btn-topup-batal" href="javascript:;" >Batal</a>
+                            </div>
+
+                        </form>
+                    </div>
+                </tr>
+                </tbody>
+            </table>
+
+
+            <div class="pagination" th:if="${totalPages}>1">
+                <div th:text="|page ${currentPage} of ${totalPages}|"></div>
+                <div>
+                    <a th:each="loop:${#numbers.sequence(1,totalPages)}"
+                       th:href="@{/merchandise/index(page=${loop})}"
+                       th:text="${loop}"></a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
+
+</body>
+</html>

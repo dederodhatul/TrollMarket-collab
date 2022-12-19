@@ -31,4 +31,8 @@ public class ShipmentServiceImpl implements ShipmentService{
         return shipmentRepository.findAll(pagination);
     }
 
+    public Page<Shipment> findAllShipment(Integer page) {
+        Pageable pagination = PageRequest.of(page - 1, rowsInPage, Sort.by("id"));
+        return shipmentRepository.findAll(pagination);
+    }
 }
