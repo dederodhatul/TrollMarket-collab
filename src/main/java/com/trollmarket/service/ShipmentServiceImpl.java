@@ -1,5 +1,4 @@
 package com.trollmarket.service;
-
 import com.trollmarket.dao.ShipmentRepository;
 import com.trollmarket.entity.Shipment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,25 +11,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-<<<<<<< HEAD
-public class ShipmentServiceImpl implements ShipmentService {
-
-    @Autowired
-    private ShipmentRepository shipmentRepository;
-=======
 public class ShipmentServiceImpl implements ShipmentService{
 
     @Autowired
     ShipmentRepository shipmentRepository;
->>>>>>> upstream/main
+
 
     private final int rowsInPage = 5;
 
     @Override
-<<<<<<< HEAD
-
-=======
->>>>>>> upstream/main
     public List<Shipment> findAllShipment() {
         return shipmentRepository.findAll();
     }
@@ -46,8 +35,4 @@ public class ShipmentServiceImpl implements ShipmentService{
         Pageable pagination = PageRequest.of(page - 1, rowsInPage, Sort.by("id"));
         return shipmentRepository.findAll(pagination);
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> upstream/main
 }

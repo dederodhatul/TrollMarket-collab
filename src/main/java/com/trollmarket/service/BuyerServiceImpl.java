@@ -45,10 +45,6 @@ public class BuyerServiceImpl implements BuyerService {
     }
 
     @Override
-<<<<<<< HEAD
-
-=======
->>>>>>> upstream/main
     public Buyer findBuyerByUsername(String username) {
         return buyerRepository.findByUsername(username);
     }
@@ -59,8 +55,4 @@ public class BuyerServiceImpl implements BuyerService {
         buyerRepository.save(buyer);
 
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> upstream/main
 }
