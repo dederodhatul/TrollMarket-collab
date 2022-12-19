@@ -75,11 +75,13 @@ public class AccountController {
     public String registerAdmin(@Valid @ModelAttribute("account") RegisterAdminDTO registerAdminDTO
             ,BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
+            model.addAttribute("role","Administrator");
             return "/account/register-form-admin";
         }
+        accountService.registerAccount(registerAdminDTO);
         RegisterAdminDTO adminAccount = new RegisterAdminDTO();
         adminAccount.setRole("Administrator");
-        model.addAttribute("role","Administrator");
+        model.addAttribute("role",adminAccount.getRole());
         model.addAttribute("account",adminAccount);
         model.addAttribute("succesMsg","Succesfuly Adding New Admin");
         return "/account/register-form-admin";
