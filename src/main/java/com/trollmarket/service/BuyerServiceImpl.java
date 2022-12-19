@@ -44,4 +44,11 @@ public class BuyerServiceImpl implements BuyerService {
         System.out.println("getProfil : "+ buyerRepository.findProfilByUsername(username));
         return buyerRepository.findProfilByUsername(username);
     }
+
+    @Override
+    public Buyer findBuyerByUsername(String username) {
+        return buyerRepository.findByUsername(username);
+    }
+
+
 }

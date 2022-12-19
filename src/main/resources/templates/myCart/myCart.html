@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="container">
+    <header th:replace="~{index :: header}"></header>
+    <nav th:replace="~{index :: nav}"></nav>
+
+    <main>
+        <div>
+            <h3>My Cart</h3>
+        </div>
+
+        <div class="content">
+            <table>
+                <a href="#" class="button add">Purchase All</a>
+
+                <thead>
+                    <th></th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Shipment</th>
+                    <th>Seller</th>
+                    <th>Total Price</th>
+                </thead>
+
+                <tbody>
+                    <tr th:each="cart : ${allCart}">
+                        <td>
+                            <a th:href="@{/myCart/remove(id=${cart.id})}">Remove</a>
+                        </td>
+                        <td th:text="${cart.product.getName()}"></td>
+                        <td th:text="${cart.quantity}"></td>
+                        <td th:text="${cart.shipment.getName()}"></td>
+                        <td th:text="${cart.product.getSeller().getFullName()}"></td>
+                        <td th:text="'Rp ' + ${cart.totalPrice()}"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div th:if = "${totalPages} >= 1">
+                <div class="pagination">
+                    <div th:text="|page ${currentPage} of ${totalPages}|"></div>
+                    <div>
+                        <a th:each="loop:${#numbers.sequence(1,totalPages)}"
+                           th:href="@{/myCart/index(page=${loop})}"
+                           th:text="${loop}"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

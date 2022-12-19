@@ -38,7 +38,7 @@ a{
 .content{
     border: 1px solid black;
     padding: 20px;
-    height: 200px;
+    height: 100%;
     position: relative;
 }
 
@@ -116,7 +116,7 @@ h3{
     background-color: white;
     height: 110px;
     padding-top: 20px;
-    visibility: hidden;
+
 }
 
 .popup-detail-product{
@@ -126,7 +126,6 @@ h3{
     top: 5px;
     left: 400px;
     padding: 3px;
-    visibility : hidden;
 }
 
 .col-action {

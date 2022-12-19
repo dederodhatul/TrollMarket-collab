@@ -2,6 +2,8 @@ package com.trollmarket.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 @Entity
 @Table(name = "Products")
@@ -114,5 +116,11 @@ public class Product {
         }else{
             return "No";
         }
+    }
+
+    public String getPriceIDR(){
+        Locale indonesia = new Locale("id", "ID");
+        String indoFormat = NumberFormat.getCurrencyInstance(indonesia).format(this.price);
+        return indoFormat;
     }
 }

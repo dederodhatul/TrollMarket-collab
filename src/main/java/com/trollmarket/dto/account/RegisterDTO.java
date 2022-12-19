@@ -4,7 +4,6 @@ import javax.validation.constraints.NotBlank;
 
 public class RegisterDTO {
 
-
     private Long id;
 
     @NotBlank(message = "Username is required")

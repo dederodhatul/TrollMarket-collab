@@ -1,6 +1,6 @@
 package com.trollmarket.controller;
 
-import com.trollmarket.dto.ProductDTO;
+import com.trollmarket.dto.product.ProductDTO;
 import com.trollmarket.service.ProductService;
 import com.trollmarket.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
