@@ -1,5 +1,4 @@
 package com.trollmarket.service;
-
 import com.trollmarket.dao.ShipmentRepository;
 import com.trollmarket.entity.Shipment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ public class ShipmentServiceImpl implements ShipmentService{
 
     @Autowired
     ShipmentRepository shipmentRepository;
+
 
     private final int rowsInPage = 5;
 

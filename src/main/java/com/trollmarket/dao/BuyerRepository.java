@@ -27,7 +27,7 @@ public interface BuyerRepository extends JpaRepository<Buyer,Long> {
             """
     )
     Buyer findByUsername(@Param("username") String username);
-           
+
     @Query("""
             SELECT byr
             FROM Buyer as byr
@@ -35,4 +35,5 @@ public interface BuyerRepository extends JpaRepository<Buyer,Long> {
             where acc.username = :username
             """)
     Buyer findBuyerByUsername(@Param("username") String username);
+
 }

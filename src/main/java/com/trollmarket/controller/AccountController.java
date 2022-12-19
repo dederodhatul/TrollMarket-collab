@@ -86,4 +86,6 @@ public class AccountController {
         model.addAttribute("succesMsg","Succesfuly Adding New Admin");
         return "/account/register-form-admin";
     }
+
+
 }
