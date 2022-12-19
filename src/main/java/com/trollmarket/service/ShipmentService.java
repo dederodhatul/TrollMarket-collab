@@ -10,4 +10,7 @@ public interface ShipmentService {
     List<Shipment> findAllShipment();
 
     Page<Shipment> findAllShipmentPageable(int page);
+
+    Page<Shipment> findAllShipment(Integer page);
+
 }

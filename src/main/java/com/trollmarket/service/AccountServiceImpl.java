@@ -2,6 +2,7 @@ package com.trollmarket.service;
 
 import com.trollmarket.config.ApplicationUserDetails;
 import com.trollmarket.dao.AccountRepository;
+import com.trollmarket.dto.account.RegisterAdminDTO;
 import com.trollmarket.dto.account.RegisterDTO;
 import com.trollmarket.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Override
-    public void registerAccount(RegisterDTO dto) {
+    public void registerAccount(RegisterAdminDTO dto) {
 
         String hashPassword = passwordEncoder.encode(dto.getPassword());
         Account account = new Account(dto.getUsername(),

@@ -9,5 +9,4 @@ public interface ShipmentRepository extends JpaRepository<Shipment, Long> {
 
 
 //    Page<Shipment> findAllShipmentService(Pageable pageable);
-
 }

@@ -79,4 +79,12 @@ public class Buyer {
     public void setAccount(Account account) {
         this.account = account;
     }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
 }

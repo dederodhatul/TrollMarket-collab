@@ -7,34 +7,39 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-<div class="container">
     <div class="container-flex-center">
-        <div class="form-content">
-            <h1>Sign Up</h1>
+        <div class="form-wrapper">
+            <h1 th:text="'Sign Up ' + ${role}"></h1>
             <form method="post" th:action="@{/account/register}" th:object="${account}">
-                <div>
+                <div class="wrap">
+                    <label>Username</label>
                     <input type="text" th:field="*{username}" placeholder="Username" />
                 </div>
-                <div>
+                <div class="wrap">
+                    <label>Password</label>
                     <input type="password" th:field="*{password}" placeholder="Password" />
                 </div>
-                <div>
+                <div class="wrap">
+                    <label>Password Confirmation</label>
                     <input type="password" th:field="*{confirmPassword}" placeholder="Password Confirmation" />
                 </div>
-                <div>
-                    <input type="text" readonly th:field="*{role}">
+                <div class="wrap">
+                    <input type="hidden" readonly th:field="*{role}">
                 </div>
-                <div>
+                <div class="wrap">
+                    <label>First Name</label>
                     <input type="text" th:field="*{firstName}" placeholder="First Name" />
                 </div>
-                <div>
+                <div class="wrap">
+                    <label>Last Name</label>
                     <input type="text" th:field="*{lastName}" placeholder="Last Name" />
                 </div>
-                <div>
-                    <input type="text" th:field="*{address}" placeholder="Address" />
+                <div class="wrap">
+                    <label>Address</label>
+                    <textarea type="text" th:field="*{address}" placeholder="Address"></textarea>
                 </div>
                 <div>
-                    <button type="submit"> Sign Up</button>
+                    <button class="button" type="submit" th:text="'Sign Up As '+ ${role}"></button>
                 </div>
             </form>
             <button class="btn btn-success">
@@ -42,6 +47,5 @@
             </button>
         </div>
     </div>
-</div>
 </body>
 </html>

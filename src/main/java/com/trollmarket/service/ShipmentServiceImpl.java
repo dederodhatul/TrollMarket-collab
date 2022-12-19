@@ -12,14 +12,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ShipmentServiceImpl implements ShipmentService{
+public class ShipmentServiceImpl implements ShipmentService {
 
     @Autowired
-    ShipmentRepository shipmentRepository;
+    private ShipmentRepository shipmentRepository;
 
     private final int rowsInPage = 5;
 
     @Override
+
     public List<Shipment> findAllShipment() {
         return shipmentRepository.findAll();
     }
@@ -28,6 +29,11 @@ public class ShipmentServiceImpl implements ShipmentService{
     public Page<Shipment> findAllShipmentPageable(int page) {
         Pageable pagination = PageRequest.of(page - 1, rowsInPage, Sort.by("id"));
 
+        return shipmentRepository.findAll(pagination);
+    }
+
+    public Page<Shipment> findAllShipment(Integer page) {
+        Pageable pagination = PageRequest.of(page - 1, rowsInPage, Sort.by("id"));
         return shipmentRepository.findAll(pagination);
     }
 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" th:href="@{/css/normalize.css}">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+
+<div class="container">
+
+  <header th:replace="~{index :: header}"></header>
+  <nav th:replace="~{index :: nav}"></nav>
+  <main>
+    <div class="title">
+      <h3>Admin</h3>
+    </div>
+
+    <div class="content">
+      <form method="post" th:action="@{/account/registerAdmin}" th:object="${account}">
+        <div class="wrap">
+          <label>Username </label>
+          <span th:errors="*{username}"></span>
+          <input type="text" th:field="*{username}" placeholder="Username" />
+        </div>
+        <div class="wrap">
+          <label>Password </label>
+          <span th:errors="*{password}"></span>
+          <input type="password" th:field="*{password}" placeholder="Password" />
+        </div>
+        <div class="wrap">
+          <label>Confirm Password </label>
+          <span th:errors="*{confirmPassword}"></span>
+          <input type="password" th:field="*{confirmPassword}" placeholder="Password Confirmation" />
+        </div>
+        <div>
+          <input type="hidden" readonly th:field="*{role}">
+        </div>
+        <div class="wrap">
+          <button type="submit" th:text="'Save New Admin'"></button>
+          <span th:text="${succesMsg}!=null ? ${succesMsg} : ''"></span>
+        </div>
+      </form>
+    </div>
+  </main>
+
+</div>
+</body>
+</html>

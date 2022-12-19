@@ -4,6 +4,7 @@ import com.trollmarket.dao.AccountRepository;
 import com.trollmarket.dao.BuyerRepository;
 import com.trollmarket.dto.account.RegisterDTO;
 import com.trollmarket.dto.profile.GetProfilDTO;
+import com.trollmarket.dto.profile.TopupDTO;
 import com.trollmarket.entity.Account;
 import com.trollmarket.entity.Buyer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,15 +41,19 @@ public class BuyerServiceImpl implements BuyerService {
 
     @Override
     public GetProfilDTO findProfilByUsername(String username) {
-        System.out.println("Service Username : "+username);
-        System.out.println("getProfil : "+ buyerRepository.findProfilByUsername(username));
         return buyerRepository.findProfilByUsername(username);
     }
 
     @Override
+
     public Buyer findBuyerByUsername(String username) {
         return buyerRepository.findByUsername(username);
     }
 
+    public void topup(String username, TopupDTO topupDTO) {
+        Buyer buyer = buyerRepository.findBuyerByUsername(username);
+        buyer.setBalance(buyer.getBalance().add(topupDTO.getBalance()));
+        buyerRepository.save(buyer);
 
+    }
 }

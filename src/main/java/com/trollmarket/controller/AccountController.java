@@ -1,5 +1,6 @@
 package com.trollmarket.controller;
 
+import com.trollmarket.dto.account.RegisterAdminDTO;
 import com.trollmarket.dto.account.RegisterDTO;
 import com.trollmarket.service.AccountService;
 import com.trollmarket.service.BuyerService;
@@ -8,6 +9,7 @@ import com.trollmarket.utility.Dropdown;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -46,12 +48,18 @@ public class AccountController {
             model.addAttribute("role",role);
             model.addAttribute("account",buyerAccount);
             return "/account/register-form";
-        }else{
+        }else if(role.toLowerCase().equals("seller")){
             RegisterDTO sellerAccount = new RegisterDTO();
             sellerAccount.setRole("Seller");
             model.addAttribute("role",role);
             model.addAttribute("account",sellerAccount);
             return "/account/register-form";
+        }else{
+            RegisterAdminDTO adminAccount = new RegisterAdminDTO();
+            adminAccount.setRole("Administrator");
+            model.addAttribute("role",role);
+            model.addAttribute("account",adminAccount);
+            return "/account/register-form-admin";
         }
     }
     @PostMapping("/register")
@@ -63,4 +71,19 @@ public class AccountController {
         }
         return "redirect:/account/loginForm";
     }
+    @PostMapping("/registerAdmin")
+    public String registerAdmin(@Valid @ModelAttribute("account") RegisterAdminDTO registerAdminDTO
+            ,BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()){
+            return "/account/register-form-admin";
+        }
+        RegisterAdminDTO adminAccount = new RegisterAdminDTO();
+        adminAccount.setRole("Administrator");
+        model.addAttribute("role","Administrator");
+        model.addAttribute("account",adminAccount);
+        model.addAttribute("succesMsg","Succesfuly Adding New Admin");
+        return "/account/register-form-admin";
+    }
+
+
 }
