@@ -45,10 +45,15 @@ public class BuyerServiceImpl implements BuyerService {
     }
 
     @Override
+    public Buyer findBuyerByUsername(String username) {
+        return buyerRepository.findByUsername(username);
+    }
+
     public void topup(String username, TopupDTO topupDTO) {
         Buyer buyer = buyerRepository.findBuyerByUsername(username);
         buyer.setBalance(buyer.getBalance().add(topupDTO.getBalance()));
         buyerRepository.save(buyer);
 
     }
+
 }

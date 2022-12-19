@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script type="text/javascript" defer th:src="@{/js/shop.js}"></script>
+</head>
+<body>
+
+<div class="container">
+
+    <header th:replace="~{index :: header}"></header>
+    <nav th:replace="~{index :: nav}"></nav>
+    <main>
+        <div class="title">
+            <h3>Shop</h3>
+        </div>
+
+        <div class="content">
+            <div class="main-wrap">
+                <form method="post" th:action="@{/shop/index}">
+                    <div class="wrap">
+                        <div class="label">
+                            <label>Name</label>
+                        </div>
+                        <div>
+                            <input type="text" name="name">
+                        </div>
+                    </div>
+
+                    <div class="wrap">
+                        <div class="label">
+                            <label>Category</label>
+                        </div>
+                        <div>
+                            <input type="text" name="cat">
+                        </div>
+                    </div>
+
+                    <div class="wrap">
+                        <div class="label">
+                            <label>Description</label>
+                        </div>
+                        <div>
+                            <textarea name="desc"></textarea>
+                        </div>
+                    </div>
+                    <div class="search-btn">
+                        <input type="submit" value="Search">
+                    </div>
+                </form>
+            </div>
+
+            <div class="transaction">
+                <table>
+                    <thead>
+                    <th class="col-action"></th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    </thead>
+                    <tr th:each="product, i : ${products}">
+                        <td>
+                            <div class="action">
+                                <div class="add-product btn-act" th:id="btn-add- + ${i.index}">
+                                    <a href="#" class="btn-action ">Add To Cart</a>
+                                </div>
+
+                                <div class="detail-product btn-act" th:id="btn-info- + ${i.index}">
+                                    <a href="#" class="btn-action">Detail Info</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td th:text="${product.name}"></td>
+                        <td th:text="${product.getPriceIDR()}"></td>
+
+                        <div class="popup-detail-product" th:id="form-info- + ${i.index}">
+                            <div class="wrap popup">
+                                <div class="label">Name</div>
+                                <div th:text="${product.name}">Laptop Lenovo E420</div>
+                            </div>
+                            <div class="wrap popup">
+                                <div class="label">Category</div>
+                                <div th:text="${product.category}">Laptop</div>
+                            </div>
+                            <div class="wrap popup">
+                                <div class="label">Description</div>
+                                <div th:text="${product.description}">Laptop Lenovo E420</div>
+                            </div>
+                            <div class="wrap popup">
+                                <div class="label">Price</div>
+                                <div th:text="${product.getPriceIDR()}">9.000.000,00</div>
+                            </div>
+                            <div class="wrap popup">
+                                <div class="label">Seller Name</div>
+                                <div th:text="${product.seller.getFullName()}">Lenovo</div>
+                            </div>
+
+                            <div class="btn">
+                                <a th:href="@{/shop/index}">Close</a>
+                            </div>
+                        </div>
+
+                        <div class="form-addProduct" th:id="form-add- + ${i.index}">
+                            <form method="post" th:action="@{/shop/addToCart(productID=${product.id})}" th:object="${cart}">
+                                <div th:if="${hasErrors}==true" id="hasErrors"></div>
+<!--                                <script  th:inline="javascript" th:if="${#fields.hasErrors('shipmentID')}">-->
+<!--                                    console.log("masuk")-->
+<!--                                     $("#form-add- + '${i.index}'").visibility.visible;-->
+<!--                                </script>-->
+<!--                                <script th:if="${#fields.hasErrors('quantity')}">-->
+<!--                                    document.getElementById("form-add-[[${i.index}]]").style.visibility="visible";-->
+<!--                                </script>-->
+<!--                                <div th:text="${hasErrors}"></div>-->
+
+                                <div class="wrap popup">
+                                    <div class="label">
+                                        <label>Quantity</label>
+                                    </div>
+                                    <div>
+                                        <span th:errors="*{quantity}"></span>
+                                        <input type="number" th:field="*{quantity}">
+                                    </div>
+                                </div>
+
+                                <div class="wrap popup">
+                                    <div class="label">
+                                        <label>Shipment</label>
+                                    </div>
+                                    <div>
+                                        <span th:errors="*{shipmentID}"></span>
+<!--                                        <div th:if="${#fields.hasErrors('shipmentID')}" th:errors="*{shipmentID}"></div>-->
+                                        <select th:field="*{shipmentID}">
+                                            <option th:each="shipment : ${allShipment}" th:text="${shipment.name}" th:value="${shipment.id}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <input type="submit" value="Tambah ke Keranjang">
+                                    <a th:href="@{/shop/index}" class="button">Batal</a>
+                                </div>
+                            </form>
+
+                        </div>
+                    </tr>
+                </table>
+
+                <div th:if="${totalPages} >= 1">
+                    <div class="pagination">
+                        <div th:text="|page ${currentPage} of ${totalPages}|"></div>
+                        <div>
+                            <a th:each="loop:${#numbers.sequence(1,totalPages)}"
+                               th:href="@{/shop/index(page=${loop})}"
+                               th:text="${loop}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package com.trollmarket.dto;
+package com.trollmarket.dto.product;
 
 import com.trollmarket.validation.BigDecimalLength;
 

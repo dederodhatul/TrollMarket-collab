@@ -1,6 +1,9 @@
 package com.trollmarket.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 @Entity
 @Table(name="Cart")
@@ -27,6 +30,13 @@ public class Cart {
     private Shipment shipment;
 
     public Cart(){}
+
+    public Cart(Buyer buyer, Product product, Integer quantity, Shipment shipment) {
+        this.buyer = buyer;
+        this.product = product;
+        this.quantity = quantity;
+        this.shipment = shipment;
+    }
 
     public Long getId() {
         return id;
@@ -67,4 +77,12 @@ public class Cart {
     public void setShipment(Shipment shipment) {
         this.shipment = shipment;
     }
+
+    public String totalPrice(){
+        Locale indonesia = new Locale("id", "ID");
+        String indoFormat = NumberFormat.getCurrencyInstance(indonesia).format((this.product.getPrice().multiply(BigDecimal.valueOf(this.quantity))).add(this.shipment.getPrice()));
+        return indoFormat;
+    }
+
+
 }
