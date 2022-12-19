@@ -52,12 +52,14 @@ public class MerchandiseController {
     }
 
     @GetMapping("/discontinue")
-    public String discontinue(@RequestParam("id") Long id, Authentication authentication){
+    public String discontinue(@RequestParam("id") Long id,
+                              @RequestParam("page") Integer page,
+                              Authentication authentication){
         ProductDTO dto = productService.findProductDTOById(id);
         dto.setDiscontinue(true);
         productService.save(dto, authentication.getName());
 
-        return "redirect:/merchandise/index";
+        return "redirect:/merchandise/index?page="+page;
     }
 
     @GetMapping("/detailProduct")
@@ -82,7 +84,6 @@ public class MerchandiseController {
         productService.delete(id);
         return "redirect:/merchandise/index";
     }
-
 
 
 }

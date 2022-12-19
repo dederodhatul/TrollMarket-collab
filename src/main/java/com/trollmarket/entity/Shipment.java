@@ -55,4 +55,12 @@ public class Shipment {
     public void setService(Boolean service) {
         this.service = service;
     }
+
+    public String getStatus(){
+        if(this.service == true){
+            return "Yes";
+        }else{
+            return "No";
+        }
+    }
 }

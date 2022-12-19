@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/normalize.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script type="text/javascript" defer th:src="@{/js/topup.js}"></script>
 </head>
 <body>
 
@@ -20,30 +21,44 @@
         </div>
 
         <div class="content">
-            <div class="profile">
-                <div class="wrap">
-                    <div class="label">Name</div>
-                    <div th:text="${user.getFullName()}"></div>
-                </div>
-
-                <div class="wrap">
-                    <div class="label">Role</div>
-                    <div th:text="${user.role}"></div>
-                </div>
-
-                <div class="wrap">
-                    <div class="label">Address</div>
-                    <div th:text="${user.address}"></div>
-                </div>
-
-                <div class="wrap">
-                    <div class="label">Balance</div>
-                    <div class="wrap-balance">
-                        <div><span th:text="${user.getBalanceIDR}"></span></div>
-<!--                        <div sec:authorize="hasRole('ROLE_BUYER')">-->
-<!--                            <a class="button" href="#">Tambah Dana</a>-->
-<!--                        </div>-->
+            <div class="profile-wrap">
+                <div class="profile">
+                    <div class="wrap">
+                        <div class="label">Name</div>
+                        <div th:text="${user.getFullName()}"></div>
                     </div>
+                    <div class="wrap">
+                        <div class="label">Role</div>
+                        <div th:text="${user.role}"></div>
+                    </div>
+                    <div class="wrap">
+                        <div class="label">Address</div>
+                        <div th:text="${user.address}"></div>
+                    </div>
+                    <div class="wrap">
+                        <div class="label">Balance</div>
+                        <div th:text="${user.getBalanceIDR}"></div>
+                    </div>
+                </div>
+
+                <div sec:authorize="hasAuthority('Buyer')">
+                    <a class="button btn-topup-tambah" href="javascript:;" >Tambah Dana</a>
+                    <div class="form-popup">
+                        <form th:action="@{/profile/topup}" method="POST" th:object="${topup}">
+                            <div th:if="${hasErrors}==true" id="hasErrors"></div>
+                            <span th:errors="*{balance}"></span>
+                            <div>
+                                <label>Tambah Dana Sebesar</label>
+                            </div>
+                            <input type="number" id="topup-value" th:field="*{balance}">
+                            <div class="button-form-popup">
+                                <button class="button" type="submit">Tambah</button>
+                                <a class="button btn-topup-batal" href="javascript:;" >Batal</a>
+                            </div>
+
+                        </form>
+                    </div>
+
                 </div>
             </div>
 

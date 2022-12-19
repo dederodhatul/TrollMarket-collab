@@ -74,11 +74,11 @@
 
         <a th:href="@{/merchandise/index}" class="button-disable">Merchandise</a>
 
-        <a href="#" class="button">Shipment</a>
+        <a th:href="@{/shipment/index}" class="button">Shipment</a>
 
         <a href="#" class="button-disable">My Cart</a>
 
-        <a href="#" class="button">Admin</a>
+        <a th:href="@{/account/registerForm(role='Administrator')}" class="button">Admin</a>
 
         <a href="#" class="button">History</a>
     </nav>

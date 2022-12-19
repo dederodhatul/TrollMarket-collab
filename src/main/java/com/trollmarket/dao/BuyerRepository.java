@@ -17,4 +17,12 @@ public interface BuyerRepository extends JpaRepository<Buyer,Long> {
             where acc.username = :username
             """)
     GetProfilDTO findProfilByUsername(@Param("username") String username);
+
+    @Query("""
+            SELECT byr
+            FROM Buyer as byr
+            INNER JOIN byr.account as acc
+            where acc.username = :username
+            """)
+    Buyer findBuyerByUsername(@Param("username") String username);
 }
