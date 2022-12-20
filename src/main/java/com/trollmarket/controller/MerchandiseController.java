@@ -55,6 +55,8 @@ public class MerchandiseController {
     public String discontinue(@RequestParam("id") Long id,
                               @RequestParam("page") Integer page,
                               Authentication authentication){
+
+        System.out.println("page :" + page );
         ProductDTO dto = productService.findProductDTOById(id);
         dto.setDiscontinue(true);
         productService.save(dto, authentication.getName());
@@ -73,6 +75,7 @@ public class MerchandiseController {
 
     @GetMapping("/formEdit")
     public String formEdit(@RequestParam("id") Long id, Model model){
+        System.out.println(productService.findProductDTOById(id).getName());
 
         model.addAttribute("product", productService.findProductDTOById(id));
         return "merchandise/formProduct";

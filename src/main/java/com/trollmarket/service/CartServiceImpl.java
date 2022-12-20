@@ -1,11 +1,11 @@
 package com.trollmarket.service;
 
-import com.trollmarket.dao.BuyerRepository;
-import com.trollmarket.dao.CartRepository;
-import com.trollmarket.dao.ProductRepository;
-import com.trollmarket.dao.ShipmentRepository;
+import com.trollmarket.dao.*;
 import com.trollmarket.dto.myCart.CartDTO;
+import com.trollmarket.entity.Buyer;
 import com.trollmarket.entity.Cart;
+import com.trollmarket.entity.Order;
+import com.trollmarket.entity.OrderDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,6 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +33,12 @@ public class CartServiceImpl implements CartService{
 
     @Autowired
     ShipmentRepository shipmentRepository;
+
+    @Autowired
+    OrderRepository orderRepository;
+
+    @Autowired
+    OrderDetailRepository orderDetailRepository;
 
     private final int rowsInPage = 5;
 
@@ -73,5 +82,24 @@ public class CartServiceImpl implements CartService{
         cartRepository.deleteById(id);
     }
 
+    @Override
+    public void purchaseAll(String name) {
+        Buyer buyer = buyerRepository.findByUsername(name);
+
+        //create new order
+        Order order = new Order();
+        order.setDate(LocalDate.now());
+        order.setBuyer(buyer);
+        orderRepository.save(order);
+
+        List<Cart> allCart = cartRepository.findCartsBuyer(name);
+        for(Cart c : allCart){
+
+          orderDetailRepository.save(new OrderDetail(order, c.getProduct(),
+                                     c.getShipment(), c.getQuantity(),
+                                     c.totalPriceInBigDecimal()));
+          cartRepository.delete(c);
+        }
+    }
 
 }
