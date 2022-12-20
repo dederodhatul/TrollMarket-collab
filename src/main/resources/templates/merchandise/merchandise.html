@@ -34,19 +34,9 @@
                         <a class="btn-action" th:href="@{/merchandise/formEdit(id=${product.id})}">Edit</a>
                         <a class="btn-action" th:href="@{/merchandise/delete(id=${product.id})}">Delete</a>
                         <a class="btn-action info" href="javascript:;" th:id="btn-info- + ${i.index}">Info</a>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                        <a th:if="${product.getStatus()}=='Yes'" th:class="button-disable-merchandise" th:href="@{/merchandise/discontinue(id = ${product.id})}">Discontinue</a>
-                        <a th:if="${product.getStatus()}=='No'" th:class="btn-action"  th:href="@{/merchandise/discontinue(id = ${product.id})}">Discontinue</a>
-=======
                         <a th:if="${product.getStatus()}=='Yes'" th:class="button-disable-merchandise"  th:href="@{/merchandise/discontinue(id = ${product.id})}">Discontinue</a>
                         <a th:if="${product.getStatus()}=='No'" th:class="btn-action"  th:href="@{/merchandise/discontinue(id = ${product.id},page = ${currentPage})}">Discontinue</a>
->>>>>>> upstream/main
-=======
-                        <a th:if="${product.getStatus()}=='Yes'" th:class="button-disable-merchandise" th:href="@{/merchandise/discontinue(id = ${product.id})}">Discontinue</a>
-                        <a th:if="${product.getStatus()}=='No'" th:class="btn-action"  th:href="@{/merchandise/discontinue(id = ${product.id})}">Discontinue</a>
-               
->>>>>>> upstream/main
+
                     </td>
                     <td th:text="${product?.name}"></td>
                     <td th:text="${product?.category}"></td>
