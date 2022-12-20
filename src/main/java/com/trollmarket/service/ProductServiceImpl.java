@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -91,5 +92,25 @@ public class ProductServiceImpl implements ProductService{
         return productRepository.findAllProductContinue(pagination, name, cat, desc);
     }
 
+    @Override
+    public Boolean isOrder(Long id) {
+        Long totalOrder = productRepository.countOrderProduct(id);
+
+        return totalOrder > 0;
+    }
+
+    @Override
+    public void productOrder(Product product) {
+        List<Product> products = findAllProduct();
+
+        for(Product pro : products){
+            if(isOrder(pro.getId()) == true){
+                pro.setOrder(true);
+            }else{
+                pro.setOrder(false);
+            }
+            productRepository.save(pro);
+        }
+    }
 
 }

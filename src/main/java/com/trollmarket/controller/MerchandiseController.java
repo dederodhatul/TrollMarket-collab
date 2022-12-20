@@ -1,9 +1,13 @@
 package com.trollmarket.controller;
 
 import com.trollmarket.dto.product.ProductDTO;
+import com.trollmarket.entity.OrderDetail;
+import com.trollmarket.entity.Product;
+import com.trollmarket.service.OrderDetailService;
 import com.trollmarket.service.ProductService;
 import com.trollmarket.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +15,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/merchandise")
@@ -22,9 +28,16 @@ public class MerchandiseController {
     @Autowired
     SellerService sellerService;
 
+    @Autowired
+    OrderDetailService orderDetailService;
+
     @GetMapping("/index")
     public String merchandise(@RequestParam(defaultValue = "1") Integer page, Model model){
         int totalPage = productService.findAllProductPageable(page).getTotalPages();
+        List<Product> products = productService.findAllProduct();
+        for(Product pro : products){
+            productService.productOrder(pro);
+        }
 
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPage);

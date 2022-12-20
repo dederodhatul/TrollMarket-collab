@@ -33,6 +33,8 @@ public class Product {
     @Column(name = "Discontinue")
     private Boolean discontinue;
 
+    private Boolean isOrder;
+
     public Product(){}
 
     public Product(Long id, Seller seller, String name, String category, String description, BigDecimal price, Boolean discontinue) {
@@ -122,5 +124,13 @@ public class Product {
         Locale indonesia = new Locale("id", "ID");
         String indoFormat = NumberFormat.getCurrencyInstance(indonesia).format(this.price);
         return indoFormat;
+    }
+
+    public Boolean getOrder() {
+        return isOrder;
+    }
+
+    public void setOrder(Boolean order) {
+        isOrder = order;
     }
 }
