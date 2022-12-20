@@ -147,7 +147,7 @@
                     </tr>
                 </table>
 
-                <div th:if="${totalPages} >= 1">
+                <div th:if="${totalPages} > 1">
                     <div class="pagination">
                         <div th:text="|page ${currentPage} of ${totalPages}|"></div>
                         <div>

@@ -19,4 +19,21 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     )
     Page<Product> findAllProductContinue(Pageable pageable, @Param("name") String name, @Param("category") String category, @Param("desc") String desc);
 
+    @Query("""
+           SELECT pro 
+           FROM Product AS pro
+           INNER JOIN OrderDetail AS ordet ON pro.id = ordet.product.id
+           """
+    )
+    List<Product> findProductOrder();
+
+    @Query("""
+            SELECT COUNT(pro)
+            FROM Product AS pro
+            INNER JOIN OrderDetail AS ordet ON pro.id = ordet.product.id
+            WHERE pro.id = :id
+            """
+    )
+    Long countOrderProduct(@Param("id") Long id);
+
 }

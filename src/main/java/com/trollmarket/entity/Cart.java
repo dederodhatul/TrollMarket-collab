@@ -84,5 +84,9 @@ public class Cart {
         return indoFormat;
     }
 
+    public BigDecimal totalPriceInBigDecimal(){
+        return this.product.getPrice().multiply(BigDecimal.valueOf(this.quantity)).add(this.shipment.getPrice());
+    }
+
 
 }

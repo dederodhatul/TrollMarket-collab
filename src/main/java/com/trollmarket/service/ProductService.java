@@ -22,4 +22,8 @@ public interface ProductService {
     void delete(Long id);
 
     Page<Product> findAllProductContinue(int page, String name, String cat, String desc);
+
+    Boolean isOrder(Long id);
+
+    void productOrder(Product product);
 }
