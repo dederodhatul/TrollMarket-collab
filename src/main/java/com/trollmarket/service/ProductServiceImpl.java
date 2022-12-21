@@ -1,8 +1,10 @@
 package com.trollmarket.service;
 
+import com.trollmarket.dao.CartRepository;
 import com.trollmarket.dao.ProductRepository;
 import com.trollmarket.dao.SellerRepository;
 import com.trollmarket.dto.product.ProductDTO;
+import com.trollmarket.entity.Cart;
 import com.trollmarket.entity.Product;
 import com.trollmarket.entity.Seller;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class ProductServiceImpl implements ProductService{
 
     @Autowired
     SellerRepository sellerRepository;
+
+    @Autowired
+    CartRepository cartRepository;
 
     private final int rowsInPage = 5;
 
@@ -83,6 +88,17 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void delete(Long id) {
+
+        List<Cart> carts = cartRepository.findAll();
+
+        if(isCart(id) == true){
+            for(Cart c : carts){
+                if(c.getProduct().getId() == id){
+                    cartRepository.delete(c);
+                }
+            }
+        }
+
         productRepository.deleteById(id);
     }
 
@@ -97,6 +113,13 @@ public class ProductServiceImpl implements ProductService{
         Long totalOrder = productRepository.countOrderProduct(id);
 
         return totalOrder > 0;
+    }
+
+    @Override
+    public Boolean isCart(Long id) {
+        Long totalCart = productRepository.countCartProduct(id);
+
+        return totalCart > 0;
     }
 
     @Override
