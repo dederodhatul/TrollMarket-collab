@@ -1,5 +1,6 @@
 package com.trollmarket.controller;
 
+import com.trollmarket.exceptionhandler.InsufficientFundsException;
 import com.trollmarket.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/myCart")
@@ -35,9 +37,12 @@ public class MyCartController {
     }
 
     @GetMapping("/purchase")
-    public String purchaseAll(Authentication authentication){
-
-        cartService.purchaseAll(authentication.getName());
+    public String purchaseAll(Authentication authentication, RedirectAttributes redirectAttributes){
+        try{
+            cartService.purchaseAll(authentication.getName());
+        }catch (InsufficientFundsException e){
+            redirectAttributes.addFlashAttribute("Error",e.getMessage());
+        }
         return "redirect:/myCart/index";
     }
 
