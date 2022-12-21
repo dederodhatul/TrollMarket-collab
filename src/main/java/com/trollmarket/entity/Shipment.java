@@ -24,6 +24,13 @@ public class Shipment {
 
     public Shipment(){}
 
+    public Shipment(Long id, String name, BigDecimal price, Boolean service) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.service = service;
+    }
+
     public Long getId() {
         return id;
     }
