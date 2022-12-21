@@ -43,29 +43,31 @@
                 </tbody>
             </table>
 
-            <div class="form-popup">
-                <form th:action="@{/shipment/upsert}" method="POST" th:object="${upsertShipment}">
-                    <div th:if="${hasErrors}==true" th:id="hasErrors"></div>
-                    <input type="hidden" th:field="*{id}" id="input-id">
-                    <div class="wrap">
-                        <label>Name</label>
-                        <span th:errors="*{name}"></span>
-                        <input type="text" th:field="*{name}" id="input-name">
-                    </div>
-                    <div class="wrap">
-                        <label>Price</label>
-                        <span th:errors="*{price}"></span>
-                        <input type="number" th:field="*{price}" id="input-price">
-                    </div>
-                    <div class="wrap" id="input-service">
-                        <label>Service</label>
-                        <input type="checkbox" th:field="*{service}" th:value="true">
-                    </div>
-                    <div class="button-form-popup">
-                        <button class="button" type="submit">Tambah</button>
-                        <a class="button btn-topup-batal" id="btn-popup-batal" th:href="@{/shipment/index(page=${currentPage})}" >Batal</a>
-                    </div>
-                </form>
+            <div class="modal">
+                <div class="modal-content">
+                    <form th:action="@{/shipment/upsert}" method="POST" th:object="${upsertShipment}">
+                        <div th:if="${hasErrors}==true" th:id="hasErrors"></div>
+                        <input type="hidden" th:field="*{id}" id="input-id">
+                        <div class="wrap">
+                            <label>Name</label>
+                            <span th:errors="*{name}"></span>
+                            <input type="text" th:field="*{name}" id="input-name">
+                        </div>
+                        <div class="wrap">
+                            <label>Price</label>
+                            <span th:errors="*{price}"></span>
+                            <input type="number" th:field="*{price}" id="input-price">
+                        </div>
+                        <div class="wrap" id="input-service">
+                            <label>Service</label>
+                            <input type="checkbox" th:field="*{service}" th:value="true">
+                        </div>
+                        <div class="button-form-popup">
+                            <button class="button" type="submit">Tambah</button>
+                            <a class="button btn-topup-batal" id="btn-popup-batal" th:href="@{/shipment/index(page=${currentPage})}" >Batal</a>
+                        </div>
+                    </form>
+                </div>
             </div>
 
             <div class="pagination" th:if="${totalPages}>1">

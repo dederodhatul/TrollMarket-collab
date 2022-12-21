@@ -42,20 +42,21 @@
 
                 <div sec:authorize="hasAuthority('Buyer')">
                     <a class="button btn-topup-tambah" href="javascript:;" >Tambah Dana</a>
-                    <div class="form-popup">
-                        <form th:action="@{/profile/topup}" method="POST" th:object="${topup}">
-                            <div th:if="${hasErrors}==true" id="hasErrors"></div>
-                            <span th:errors="*{balance}"></span>
-                            <div>
-                                <label>Tambah Dana Sebesar</label>
-                            </div>
-                            <input type="number" id="topup-value" th:field="*{balance}">
-                            <div class="button-form-popup">
-                                <button class="button" type="submit">Tambah</button>
-                                <a class="button btn-topup-batal" href="javascript:;" >Batal</a>
-                            </div>
-
-                        </form>
+                    <div class="modal">
+                        <div class="modal-content">
+                            <form th:action="@{/profile/topup}" method="POST" th:object="${topup}">
+                                <div th:if="${hasErrors}==true" id="hasErrors"></div>
+                                <span th:errors="*{balance}"></span>
+                                <div>
+                                    <label>Tambah Dana Sebesar</label>
+                                </div>
+                                <input type="number" id="topup-value" th:field="*{balance}">
+                                <div class="button-form-popup">
+                                    <button class="button" type="submit">Tambah</button>
+                                    <a class="button btn-topup-batal" href="javascript:;" >Batal</a>
+                                </div>
+                            </form>
+                        </div>
                     </div>
 
                 </div>

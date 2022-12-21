@@ -1,6 +1,7 @@
 package com.trollmarket.controller;
 
 import com.trollmarket.dto.myCart.CartDTO;
+import com.trollmarket.dto.shipment.UpsertShipmentDTO;
 import com.trollmarket.entity.Product;
 import com.trollmarket.service.CartService;
 import com.trollmarket.service.ProductService;
@@ -73,6 +74,7 @@ public class ShopController {
             model.addAttribute("allShipment", shipmentService.findAllShipment());
             model.addAttribute("products", products);
             model.addAttribute("hasErrors",true);
+            model.addAttribute("productID",id);
 
             return "shop/shop";
         }
@@ -80,4 +82,9 @@ public class ShopController {
         return "redirect:/myCart/index";
     }
 
+    @GetMapping("/detailProduct")
+    @ResponseBody
+    public Product detailProduct(@RequestParam Long id){
+        return productService.findById(id);
+    }
 }
