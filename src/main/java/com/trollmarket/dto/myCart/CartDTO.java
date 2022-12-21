@@ -9,7 +9,8 @@ public class CartDTO {
 
     private Long productID;
 
-    @Min(value = 1,message = "Quantity Minimun 1")
+    @Min(value = 1,message = "Quantity Minimum 1")
+    @NotNull(message= "Quantity must not be null")
     private Integer quantity;
 
     @NotNull(message = "shipment must not be null")

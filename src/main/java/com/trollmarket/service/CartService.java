@@ -16,4 +16,6 @@ public interface CartService {
     Page<Cart> findAllCartPageable(int page, String username);
 
     void deleteById(Long id);
+
+    void purchaseAll(String name);
 }

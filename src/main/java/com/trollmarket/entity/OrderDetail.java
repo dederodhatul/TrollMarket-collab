@@ -21,7 +21,7 @@ public class OrderDetail {
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name = "ShiptmentID")
+    @JoinColumn(name = "ShipmentID")
     private Shipment shipment;
 
     @Column(name = "Quantity")
@@ -31,6 +31,14 @@ public class OrderDetail {
     private BigDecimal subTotal;
 
     public OrderDetail(){}
+
+    public OrderDetail(Order order, Product product, Shipment shipment, Integer quantity, BigDecimal subTotal) {
+        this.order = order;
+        this.product = product;
+        this.shipment = shipment;
+        this.quantity = quantity;
+        this.subTotal = subTotal;
+    }
 
     public Long getId() {
         return id;

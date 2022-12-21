@@ -55,5 +55,4 @@ public class BuyerServiceImpl implements BuyerService {
         buyerRepository.save(buyer);
 
     }
-
 }
