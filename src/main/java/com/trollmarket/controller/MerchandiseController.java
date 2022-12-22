@@ -101,5 +101,11 @@ public class MerchandiseController {
         return "redirect:/merchandise/index";
     }
 
+    @GetMapping("/infoProduct")
+    @ResponseBody
+    public Product infoProduct(@RequestParam("id")Long id){
+        return productService.findById(id);
+    }
+
 
 }

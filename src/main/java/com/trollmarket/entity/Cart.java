@@ -1,6 +1,7 @@
 package com.trollmarket.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -15,17 +16,20 @@ public class Cart {
     private Long id;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "BuyerID")
     private Buyer buyer;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "ProductID")
     private Product product;
 
-    @Column(name = "Quantity")
+    @Column(name = "Quantity", columnDefinition = "default 1")
     private Integer quantity;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name="ShipmentID")
     private Shipment shipment;
 
