@@ -72,8 +72,12 @@
                     <th>Shipment</th>
                     <th>Total Price</th>
                     </thead>
-                    <tr>
-                        <td></td>
+                    <tr th:each="tr : ${transactions}">
+                        <td th:text="${tr.order.getDate()}"></td>
+                        <td th:text="${tr.product.getName()}"></td>
+                        <td th:text="${tr.quantity}"></td>
+                        <td th:text="${tr.shipment.getName()}"></td>
+                        <td th:text="${tr.priceFormat()}"></td>
                     </tr>
                 </table>
             </div>

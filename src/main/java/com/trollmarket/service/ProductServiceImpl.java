@@ -1,8 +1,10 @@
 package com.trollmarket.service;
 
+import com.trollmarket.dao.CartRepository;
 import com.trollmarket.dao.ProductRepository;
 import com.trollmarket.dao.SellerRepository;
 import com.trollmarket.dto.product.ProductDTO;
+import com.trollmarket.entity.Cart;
 import com.trollmarket.entity.Product;
 import com.trollmarket.entity.Seller;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +25,9 @@ public class ProductServiceImpl implements ProductService{
 
     @Autowired
     SellerRepository sellerRepository;
+
+    @Autowired
+    CartRepository cartRepository;
 
     private final int rowsInPage = 5;
 
@@ -78,6 +81,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void delete(Long id) {
+
         productRepository.deleteById(id);
     }
 
@@ -93,6 +97,7 @@ public class ProductServiceImpl implements ProductService{
 
         return totalOrder > 0;
     }
+
 
     @Override
     public void orderedProduct(String username) {

@@ -5,6 +5,9 @@ import com.trollmarket.dto.profile.GetProfilDTO;
 import com.trollmarket.entity.Buyer;
 import com.trollmarket.entity.Buyer;
 import com.trollmarket.dto.profile.TopupDTO;
+import com.trollmarket.entity.OrderDetail;
+
+import java.util.List;
 
 
 public interface BuyerService {
@@ -15,5 +18,7 @@ public interface BuyerService {
     Buyer findBuyerByUsername(String username);
 
     void topup(String username, TopupDTO topupDTO);
+
+    List<OrderDetail> findAllTransactionBuyer(String username);
 
 }

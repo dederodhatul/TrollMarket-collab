@@ -88,5 +88,8 @@ public class Cart {
         return this.product.getPrice().multiply(BigDecimal.valueOf(this.quantity)).add(this.shipment.getPrice());
     }
 
+    public BigDecimal totalPriceWithoutShipment(){
+        return this.product.getPrice().multiply(BigDecimal.valueOf(this.quantity));
+    }
 
 }

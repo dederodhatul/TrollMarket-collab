@@ -27,6 +27,7 @@ public class ShipmentController {
         model.addAttribute("upsertShipment",new UpsertShipmentDTO());
         return "shipment/shipment";
     }
+
     @PostMapping("/upsert")
     public String upsert(@Valid @ModelAttribute("upsertShipment")UpsertShipmentDTO upsertShipmentDTO,
                          BindingResult bindingResult,Model model){

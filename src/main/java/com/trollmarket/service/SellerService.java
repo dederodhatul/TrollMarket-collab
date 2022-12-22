@@ -2,6 +2,7 @@ package com.trollmarket.service;
 
 import com.trollmarket.dto.account.RegisterDTO;
 import com.trollmarket.dto.profile.GetProfilDTO;
+import com.trollmarket.entity.OrderDetail;
 import com.trollmarket.entity.Seller;
 
 import java.util.List;
@@ -14,5 +15,7 @@ public interface SellerService {
     List<Seller> findAllSeller();
 
     GetProfilDTO findProfilByUsername(String username);
+
+    List<OrderDetail> findAllTransactionSeller(String username);
 
 }

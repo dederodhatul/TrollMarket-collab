@@ -20,4 +20,6 @@ public interface ShipmentService {
 
     void updateService(Long id);
 
+    List<Shipment> findAllShipmentService();
+
 }
