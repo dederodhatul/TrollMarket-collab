@@ -25,7 +25,7 @@ public interface ProductService {
 
     Boolean isOrder(Long id);
 
-    Boolean isCart(Long id);
+    Boolean isCart(Long idProduct, Long idShipment);
 
     void productOrder(Product product);
 }

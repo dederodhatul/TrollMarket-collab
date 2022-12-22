@@ -69,7 +69,7 @@ public class MerchandiseController {
                               @RequestParam("page") Integer page,
                               Authentication authentication){
 
-        System.out.println("page :" + page );
+//        System.out.println("page :" + page );
         ProductDTO dto = productService.findProductDTOById(id);
         dto.setDiscontinue(true);
         productService.save(dto, authentication.getName());
@@ -99,6 +99,12 @@ public class MerchandiseController {
 
         productService.delete(id);
         return "redirect:/merchandise/index";
+    }
+
+    @GetMapping("/infoProduct")
+    @ResponseBody
+    public Product infoProduct(@RequestParam("id")Long id){
+        return productService.findById(id);
     }
 
 

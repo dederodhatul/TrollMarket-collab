@@ -41,8 +41,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
            SELECT COUNT(pro)
            FROM Product AS pro
            INNER JOIN Cart AS c ON pro.id = c.product.id
-           WHERE pro.id = :id
+           WHERE pro.id = :idProduct AND c.shipment.id = :idShipment 
            """)
-    Long countCartProduct(@Param("id") Long id);
+    Long countCartProduct(@Param("idProduct") Long idProduct, @Param("idShipment") Long idShipment);
     
 }

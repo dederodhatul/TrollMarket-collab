@@ -61,6 +61,10 @@ public class CartServiceImpl implements CartService{
                 shipmentRepository.findById(cartDTO.getShipmentID()).get()
         );
 
+//        if(productRepository.countCartProduct(productID, cart.getShipment().getId()) > 0){
+//
+//        }
+
         cartRepository.save(cart);
     }
 
@@ -87,9 +91,7 @@ public class CartServiceImpl implements CartService{
         BigDecimal totalPay = new BigDecimal(0);
 
         for(Cart c : allCart){
-            System.out.println("total price: " + c.totalPriceInBigDecimal());
             totalPay = totalPay.add(c.totalPriceInBigDecimal());
-            System.out.println("total pay: " + totalPay);
         }
 
         if(buyer.getBalance().compareTo(totalPay) < 0){
@@ -101,7 +103,6 @@ public class CartServiceImpl implements CartService{
         order.setDate(LocalDate.now());
         order.setBuyer(buyer);
         orderRepository.save(order);
-
 
         for(Cart c : allCart){
           buyer.setBalance(buyer.getBalance().subtract(c.totalPriceInBigDecimal()));

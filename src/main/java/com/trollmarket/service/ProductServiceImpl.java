@@ -13,9 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -89,16 +87,6 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public void delete(Long id) {
 
-        List<Cart> carts = cartRepository.findAll();
-
-        if(isCart(id) == true){
-            for(Cart c : carts){
-                if(c.getProduct().getId() == id){
-                    cartRepository.delete(c);
-                }
-            }
-        }
-
         productRepository.deleteById(id);
     }
 
@@ -116,8 +104,8 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Boolean isCart(Long id) {
-        Long totalCart = productRepository.countCartProduct(id);
+    public Boolean isCart(Long idProduct, Long idShipment) {
+        Long totalCart = productRepository.countCartProduct(idProduct, idShipment);
 
         return totalCart > 0;
     }

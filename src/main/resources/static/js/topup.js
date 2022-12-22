@@ -1,17 +1,17 @@
 var btnTopupTambah = document.querySelector(".btn-topup-tambah")
-var btnTopupBatal = document.querySelector(".form-popup a")
-
+var btnTopupBatal = document.querySelector(".modal-content a")
+var modal = document.querySelector(".modal")
 
 document.addEventListener('DOMContentLoaded',function(){
 
-    if(document.getElementById("hasErrors")==null){
-        document.querySelector(".form-popup").style.visibility = "hidden";
+    if(document.getElementById("hasErrors")!=null){
+        modal.style.display = "flex";
     }
     btnTopupTambah.addEventListener('click',function(){
-        document.querySelector(".form-popup").style.visibility = "visible";
+        modal.style.display = "flex";
     })
     btnTopupBatal.addEventListener('click',function(){
-        document.querySelector(".form-popup").style.visibility = "hidden";
+        modal.style.display = "none";
     })
 })
 

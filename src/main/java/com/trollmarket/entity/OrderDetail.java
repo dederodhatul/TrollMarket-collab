@@ -1,7 +1,10 @@
 package com.trollmarket.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 @Entity
 @Table(name="OrderDetail")
@@ -13,18 +16,21 @@ public class OrderDetail {
     private Long id;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "OrderID")
     private Order order;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "ProductID")
     private Product product;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "ShipmentID")
     private Shipment shipment;
 
-    @Column(name = "Quantity")
+    @Column(name = "Quantity", columnDefinition = "default 1")
     private Integer quantity;
 
     @Column(name = "SubTotal")
@@ -86,5 +92,23 @@ public class OrderDetail {
 
     public void setSubTotal(BigDecimal subTotal) {
         this.subTotal = subTotal;
+    }
+
+    public String priceFormat(){
+        Locale indonesia = new Locale("id", "ID");
+        String indoFormat = NumberFormat.getCurrencyInstance(indonesia).format((this.subTotal));
+        return indoFormat;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDetail{" +
+                "id=" + id +
+                ", order=" + order +
+                ", product=" + product +
+                ", shipment=" + shipment +
+                ", quantity=" + quantity +
+                ", subTotal=" + subTotal +
+                '}';
     }
 }

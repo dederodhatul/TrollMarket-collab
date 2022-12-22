@@ -1,5 +1,7 @@
 package com.trollmarket.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -14,6 +16,7 @@ public class Order {
     private Long id;
 
     @Column(name = "Date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
     @ManyToOne

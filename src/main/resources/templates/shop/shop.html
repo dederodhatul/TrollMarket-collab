@@ -63,89 +63,78 @@
                     <tr th:each="product, i : ${products}">
                         <td>
                             <div class="action">
-                                <div class="add-product btn-act" th:id="btn-add- + ${i.index}">
-                                    <a href="#" class="btn-action ">Add To Cart</a>
+                                <div class="add-product btn-act">
+                                    <a href="javascript:;" class="btn-action" th:onclick="addToCart([[${product.id}]])">Add To Cart</a>
                                 </div>
 
-                                <div class="detail-product btn-act" th:id="btn-info- + ${i.index}">
-                                    <a href="#" class="btn-action">Detail Info</a>
+                                <div class="detail-product btn-act">
+                                    <a href="javascript:;" class="btn-action" th:onclick="fetchDetailInfo([[${product.id}]])">Detail Info</a>
                                 </div>
                             </div>
                         </td>
                         <td th:text="${product.name}"></td>
                         <td th:text="${product.getPriceIDR()}"></td>
-
-                        <div class="popup-detail-product" th:id="form-info- + ${i.index}">
-                            <div class="wrap popup">
-                                <div class="label">Name</div>
-                                <div th:text="${product.name}">Laptop Lenovo E420</div>
-                            </div>
-                            <div class="wrap popup">
-                                <div class="label">Category</div>
-                                <div th:text="${product.category}">Laptop</div>
-                            </div>
-                            <div class="wrap popup">
-                                <div class="label">Description</div>
-                                <div th:text="${product.description}">Laptop Lenovo E420</div>
-                            </div>
-                            <div class="wrap popup">
-                                <div class="label">Price</div>
-                                <div th:text="${product.getPriceIDR()}">9.000.000,00</div>
-                            </div>
-                            <div class="wrap popup">
-                                <div class="label">Seller Name</div>
-                                <div th:text="${product.seller.getFullName()}">Lenovo</div>
-                            </div>
-
-                            <div class="btn">
-                                <a th:href="@{/shop/index}">Close</a>
-                            </div>
-                        </div>
-
-                        <div class="form-addProduct" th:id="form-add- + ${i.index}">
-                            <form method="post" th:action="@{/shop/addToCart(productID=${product.id})}" th:object="${cart}">
-                                <div th:if="${hasErrors}==true" id="hasErrors"></div>
-<!--                                <script  th:inline="javascript" th:if="${#fields.hasErrors('shipmentID')}">-->
-<!--                                    console.log("masuk")-->
-<!--                                     $("#form-add- + '${i.index}'").visibility.visible;-->
-<!--                                </script>-->
-<!--                                <script th:if="${#fields.hasErrors('quantity')}">-->
-<!--                                    document.getElementById("form-add-[[${i.index}]]").style.visibility="visible";-->
-<!--                                </script>-->
-<!--                                <div th:text="${hasErrors}"></div>-->
-
-                                <div class="wrap popup">
-                                    <div class="label">
-                                        <label>Quantity</label>
-                                    </div>
-                                    <div>
-                                        <span th:errors="*{quantity}"></span>
-                                        <input type="number" th:field="*{quantity}">
-                                    </div>
-                                </div>
-
-                                <div class="wrap popup">
-                                    <div class="label">
-                                        <label>Shipment</label>
-                                    </div>
-                                    <div>
-                                        <span th:errors="*{shipmentID}"></span>
-<!--                                        <div th:if="${#fields.hasErrors('shipmentID')}" th:errors="*{shipmentID}"></div>-->
-                                        <select th:field="*{shipmentID}">
-                                            <option th:each="shipment : ${allShipment}" th:text="${shipment.name}" th:value="${shipment.id}"></option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <input type="submit" value="Tambah ke Keranjang">
-                                    <a th:href="@{/shop/index}" class="button">Batal</a>
-                                </div>
-                            </form>
-
-                        </div>
                     </tr>
                 </table>
+
+                <div class="modal">
+                    <div class="modal-content">
+                        <div class="wrap popup">
+                            <div class="label">Name</div>
+                            <div id="product-name">Laptop Lenovo E420</div>
+                        </div>
+                        <div class="wrap popup">
+                            <div class="label">Category</div>
+                            <div id="product-category">Laptop</div>
+                        </div>
+                        <div class="wrap popup">
+                            <div class="label">Description</div>
+                            <div id="product-description">Laptop Lenovo E420</div>
+                        </div>
+                        <div class="wrap popup">
+                            <div class="label">Price</div>
+                            <div id="product-price">9.000.000,00</div>
+                        </div>
+                        <div class="wrap popup">
+                            <div class="label">Seller Name</div>
+                            <div id="product-seller">Lenovo</div>
+                        </div>
+
+                        <div class="btn">
+                            <a th:href="@{/shop/index}">Close</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal">
+                    <div class="modal-content">
+                        <form method="post" th:action="@{/shop/addToCart(page=${currentPage})}" th:object="${cart}">
+                            <div th:if="${hasErrors}==true" id="hasErrors" th:text="${productID}" hidden></div>
+                            <input type="hidden" id="productID" name="productID">
+                            <div class="wrap">
+                                <label>Quantity</label>
+                                <span th:errors="*{quantity}"></span>
+                                <input type="number" th:field="*{quantity}">
+                            </div>
+
+                            <div class="wrap">
+                                <label>Shipment</label>
+                                <span th:errors="*{shipmentID}"></span>
+                                <!--                                        <div th:if="${#fields.hasErrors('shipmentID')}" th:errors="*{shipmentID}"></div>-->
+                                <select th:field="*{shipmentID}">
+                                    <option th:each="shipment : ${allShipment}" th:text="${shipment.name}" th:value="${shipment.id}"></option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <input type="submit" value="Tambah ke Keranjang">
+                                <a th:href="@{/shop/index}" class="button">Batal</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
 
                 <div th:if="${totalPages} > 1">
                     <div class="pagination">
