@@ -13,8 +13,6 @@ public interface ProductService {
 
     List<Product> findAllProduct();
 
-    Page<Product> findAllProductPageable(int page);
-
     Product findById(Long id);
 
     ProductDTO findProductDTOById(Long id);
@@ -25,5 +23,6 @@ public interface ProductService {
 
     Boolean isOrder(Long id);
 
-    void productOrder(Product product);
+    void orderedProduct(String username);
+    Page<Product> findAllProductBySeller(String username,Integer page);
 }
