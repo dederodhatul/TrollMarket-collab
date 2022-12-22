@@ -32,16 +32,16 @@ public class MerchandiseController {
     OrderDetailService orderDetailService;
 
     @GetMapping("/index")
-    public String merchandise(@RequestParam(defaultValue = "1") Integer page, Model model){
-        int totalPage = productService.findAllProductPageable(page).getTotalPages();
-        List<Product> products = productService.findAllProduct();
-        for(Product pro : products){
-            productService.productOrder(pro);
-        }
+    public String merchandise(@RequestParam(defaultValue = "1") Integer page,
+                              Model model, Authentication authentication){
+
+        Page<Product> products = productService.findAllProductBySeller(authentication.getName(),page);
+        int totalPage = products.getTotalPages();
+        productService.orderedProduct(authentication.getName());
 
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPage);
-        model.addAttribute("products", productService.findAllProductPageable(page));
+        model.addAttribute("products",products);
         return "merchandise/merchandise";
     }
 
@@ -68,8 +68,7 @@ public class MerchandiseController {
     public String discontinue(@RequestParam("id") Long id,
                               @RequestParam("page") Integer page,
                               Authentication authentication){
-
-        System.out.println("page :" + page );
+                              
         ProductDTO dto = productService.findProductDTOById(id);
         dto.setDiscontinue(true);
         productService.save(dto, authentication.getName());
@@ -88,8 +87,6 @@ public class MerchandiseController {
 
     @GetMapping("/formEdit")
     public String formEdit(@RequestParam("id") Long id, Model model){
-        System.out.println(productService.findProductDTOById(id).getName());
-
         model.addAttribute("product", productService.findProductDTOById(id));
         return "merchandise/formProduct";
     }

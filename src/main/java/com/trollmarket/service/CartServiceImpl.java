@@ -2,10 +2,8 @@ package com.trollmarket.service;
 
 import com.trollmarket.dao.*;
 import com.trollmarket.dto.myCart.CartDTO;
-import com.trollmarket.entity.Buyer;
-import com.trollmarket.entity.Cart;
-import com.trollmarket.entity.Order;
-import com.trollmarket.entity.OrderDetail;
+import com.trollmarket.entity.*;
+import com.trollmarket.exceptionhandler.InsufficientFundsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -63,6 +61,10 @@ public class CartServiceImpl implements CartService{
                 shipmentRepository.findById(cartDTO.getShipmentID()).get()
         );
 
+//        if(productRepository.countCartProduct(productID, cart.getShipment().getId()) > 0){
+//
+//        }
+
         cartRepository.save(cart);
     }
 
@@ -85,6 +87,16 @@ public class CartServiceImpl implements CartService{
     @Override
     public void purchaseAll(String name) {
         Buyer buyer = buyerRepository.findByUsername(name);
+        List<Cart> allCart = cartRepository.findCartsBuyer(name);
+        BigDecimal totalPay = new BigDecimal(0);
+
+        for(Cart c : allCart){
+            totalPay = totalPay.add(c.totalPriceInBigDecimal());
+        }
+
+        if(buyer.getBalance().compareTo(totalPay) < 0){
+            throw new InsufficientFundsException("Dana tidak cukup, silahkan top up");
+        }
 
         //create new order
         Order order = new Order();
@@ -92,8 +104,10 @@ public class CartServiceImpl implements CartService{
         order.setBuyer(buyer);
         orderRepository.save(order);
 
-        List<Cart> allCart = cartRepository.findCartsBuyer(name);
         for(Cart c : allCart){
+          buyer.setBalance(buyer.getBalance().subtract(c.totalPriceInBigDecimal()));
+          Seller seller = c.getProduct().getSeller();
+          seller.setBalance(seller.getBalance().add(c.totalPriceWithoutShipment()));
 
           orderDetailRepository.save(new OrderDetail(order, c.getProduct(),
                                      c.getShipment(), c.getQuantity(),

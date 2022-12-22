@@ -69,4 +69,10 @@ public class ShipmentServiceImpl implements ShipmentService{
         shipment.setService(false);
         shipmentRepository.save(shipment);
     }
+
+    @Override
+    public List<Shipment> findAllShipmentService() {
+        return shipmentRepository.findAllShipmentService();
+    }
+
 }

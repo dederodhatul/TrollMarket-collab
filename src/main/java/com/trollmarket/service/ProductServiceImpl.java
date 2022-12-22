@@ -1,8 +1,10 @@
 package com.trollmarket.service;
 
+import com.trollmarket.dao.CartRepository;
 import com.trollmarket.dao.ProductRepository;
 import com.trollmarket.dao.SellerRepository;
 import com.trollmarket.dto.product.ProductDTO;
+import com.trollmarket.entity.Cart;
 import com.trollmarket.entity.Product;
 import com.trollmarket.entity.Seller;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +25,9 @@ public class ProductServiceImpl implements ProductService{
 
     @Autowired
     SellerRepository sellerRepository;
+
+    @Autowired
+    CartRepository cartRepository;
 
     private final int rowsInPage = 5;
 
@@ -54,11 +57,6 @@ public class ProductServiceImpl implements ProductService{
         return productRepository.findAll();
     }
 
-    @Override
-    public Page<Product> findAllProductPageable(int page) {
-        Pageable pagination = PageRequest.of(page - 1, rowsInPage, Sort.by("id"));
-        return productRepository.findAll(pagination);
-    }
 
     @Override
     public Product findById(Long id) {
@@ -83,6 +81,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void delete(Long id) {
+
         productRepository.deleteById(id);
     }
 
@@ -99,18 +98,26 @@ public class ProductServiceImpl implements ProductService{
         return totalOrder > 0;
     }
 
-    @Override
-    public void productOrder(Product product) {
-        List<Product> products = findAllProduct();
 
+    @Override
+    public void orderedProduct(String username) {
+        Page<Product> productsPageable = productRepository.findAllProductBySeller(username,Pageable.unpaged());
+        List<Product> products = productsPageable.getContent();
         for(Product pro : products){
-            if(isOrder(pro.getId()) == true){
+            if(productRepository.countOrderProduct(pro.getId()) > 0 ||
+                productRepository.countCartProduct(pro.getId()) > 0 ){
                 pro.setOrder(true);
             }else{
                 pro.setOrder(false);
             }
             productRepository.save(pro);
         }
+    }
+
+    @Override
+    public Page<Product> findAllProductBySeller(String username,Integer page) {
+        Pageable pagination = PageRequest.of(page - 1,rowsInPage,Sort.by("id"));
+        return productRepository.findAllProductBySeller(username,pagination);
     }
 
 }
