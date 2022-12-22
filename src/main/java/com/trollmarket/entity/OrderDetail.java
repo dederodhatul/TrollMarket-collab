@@ -1,6 +1,7 @@
 package com.trollmarket.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity
@@ -21,6 +22,7 @@ public class OrderDetail {
     private Product product;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "ShipmentID")
     private Shipment shipment;
 
