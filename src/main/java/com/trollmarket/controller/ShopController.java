@@ -43,7 +43,7 @@ public class ShopController {
 
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPage);
-        model.addAttribute("allShipment", shipmentService.findAllShipment());
+        model.addAttribute("allShipment", shipmentService.findAllShipmentService());
         model.addAttribute("products", products);
         model.addAttribute("cart", new CartDTO());
 
@@ -70,9 +70,10 @@ public class ShopController {
 
             model.addAttribute("currentPage", page);
             model.addAttribute("totalPages", totalPage);
-            model.addAttribute("allShipment", shipmentService.findAllShipment());
+            model.addAttribute("allShipment", shipmentService.findAllShipmentService());
             model.addAttribute("products", products);
             model.addAttribute("hasErrors",true);
+
 
             return "shop/shop";
         }
