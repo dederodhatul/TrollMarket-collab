@@ -57,11 +57,6 @@ public class ProductServiceImpl implements ProductService{
         return productRepository.findAll();
     }
 
-    @Override
-    public Page<Product> findAllProductPageable(int page) {
-        Pageable pagination = PageRequest.of(page - 1, rowsInPage, Sort.by("id"));
-        return productRepository.findAll(pagination);
-    }
 
     @Override
     public Product findById(Long id) {
@@ -104,24 +99,29 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Boolean isCart(Long idProduct, Long idShipment) {
-        Long totalCart = productRepository.countCartProduct(idProduct, idShipment);
-
-        return totalCart > 0;
-    }
-
-    @Override
     public void productOrder(Product product) {
         List<Product> products = findAllProduct();
 
+    }
+    public void orderedProduct(String username) {
+        Page<Product> productsPageable = productRepository.findAllProductBySeller(username,Pageable.unpaged());
+        List<Product> products = productsPageable.getContent();
+
         for(Product pro : products){
-            if(isOrder(pro.getId()) == true){
+            if(productRepository.countOrderProduct(pro.getId()) > 0 ||
+                productRepository.countCartProduct(pro.getId()) > 0 ){
                 pro.setOrder(true);
             }else{
                 pro.setOrder(false);
             }
             productRepository.save(pro);
         }
+    }
+
+    @Override
+    public Page<Product> findAllProductBySeller(String username,Integer page) {
+        Pageable pagination = PageRequest.of(page - 1,rowsInPage,Sort.by("id"));
+        return productRepository.findAllProductBySeller(username,pagination);
     }
 
 }
