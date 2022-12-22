@@ -31,46 +31,50 @@
                 <tbody>
                 <tr th:each="product, i : ${products}">
                     <td>
-                        <a class="btn-action" th:href="@{/merchandise/formEdit(id=${product.id})}">Edit</a>
-                        <a class="btn-action" th:href="@{/merchandise/delete(id=${product.id})}">Delete</a>
-                        <a class="btn-action info" href="javascript:;" th:id="btn-info- + ${i.index}">Info</a>
-                        <a th:if="${product.getStatus()}=='Yes'" th:class="button-disable-merchandise" th:href="@{/merchandise/discontinue(id = ${product.id})}">Discontinue</a>
-                        <a th:if="${product.getStatus()}=='No'" th:class="btn-action"  th:href="@{/merchandise/discontinue(id = ${product.id},page=${currentPage})}">Discontinue</a>
-               
+                        <a th:if="${product.getOrder()} == true" class="btn-action button-disable-merchandise" th:href="@{/merchandise/formEdit(id=${product.id})}">Edit</a>
+                        <a th:if="${product.getOrder()} == false" class="btn-action" th:href="@{/merchandise/formEdit(id=${product.id})}">Edit</a>
+                        <a th:if="${product.getOrder()} == true" class="btn-action button-disable-merchandise" th:href="@{/merchandise/delete(id=${product.id})}">Delete</a>
+                        <a th:if="${product.getOrder()} == false" class="btn-action" th:href="@{/merchandise/delete(id=${product.id})}">Delete</a>
+                        <a class="btn-action info" href="javascript:;" th:onclick="fetchInfoProduct([[${product.id}]])">Info</a>
+                        <a th:if="${product.getStatus()}=='Yes'" th:class="button-disable-merchandise"  th:href="@{/merchandise/discontinue(id = ${product.id})}">Discontinue</a>
+                        <a th:if="${product.getStatus()}=='No'" th:class="btn-action"  th:href="@{/merchandise/discontinue(id = ${product.id},page = ${currentPage})}">Discontinue</a>
+             
                     </td>
                     <td th:text="${product?.name}"></td>
                     <td th:text="${product?.category}"></td>
                     <td th:text="${product?.getStatus()}"></td>
-
-                    <div class="form-info" th:id="form-info- + ${i.index}">
-                        <div class="wrap popup">
-                            <div class="label">Product Name</div>
-                            <div th:text="${product?.name}"></div>
-                        </div>
-                        <div class="wrap popup">
-                            <div class="label">Category</div>
-                            <div th:text="${product?.category}"></div>
-                        </div>
-                        <div class="wrap popup">
-                            <div class="label">Description</div>
-                            <div th:text="${product?.description}"></div>
-                        </div>
-                        <div class="wrap popup">
-                            <div class="label">Price</div>
-                            <div th:text="${product?.getPriceIDR()}"></div>
-                        </div>
-                        <div class="wrap popup">
-                            <div class="label">Discontinue</div>
-                            <div th:text="${product?.getStatus()}">No</div>
-                        </div>
-
-                        <div class="btn">
-                            <a th:href="@{/merchandise/index}">Close</a>
-                        </div>
-                    </div>
                 </tr>
                 </tbody>
             </table>
+
+            <div class="modal">
+                <div class="modal-content">
+                    <div class="wrap popup">
+                        <div class="label">Product Name</div>
+                        <div id="product-name"></div>
+                    </div>
+                    <div class="wrap popup">
+                        <div class="label">Category</div>
+                        <div id="product-category"></div>
+                    </div>
+                    <div class="wrap popup">
+                        <div class="label">Description</div>
+                        <div id="product-description"></div>
+                    </div>
+                    <div class="wrap popup">
+                        <div class="label">Price</div>
+                        <div id="product-price"></div>
+                    </div>
+                    <div class="wrap popup">
+                        <div class="label">Discontinue</div>
+                        <div id="product-discontinue">No</div>
+                    </div>
+
+                    <div class="btn">
+                        <a th:href="@{/merchandise/index}">Close</a>
+                    </div>
+                </div>
+            </div>
 
             <div class="pagination">
                 <div th:text="|page ${currentPage} of ${totalPages}|"></div>

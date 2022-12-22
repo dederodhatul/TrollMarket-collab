@@ -34,5 +34,12 @@ public class MyCartController {
         return "redirect:/myCart/index";
     }
 
+    @GetMapping("/purchase")
+    public String purchaseAll(Authentication authentication){
+
+        cartService.purchaseAll(authentication.getName());
+        return "redirect:/myCart/index";
+    }
+
 
 }

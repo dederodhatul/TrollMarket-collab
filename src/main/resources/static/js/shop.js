@@ -28,11 +28,10 @@ function fetchDetailInfo(id){
      request.send();
      request.onload = ()=>{
          var object = JSON.parse(request.response);
-         console.log(object);
          document.getElementById("product-name").innerHTML = object.name;
          document.getElementById("product-category").innerHTML = object.category;
          document.getElementById("product-description").innerHTML = object.description;
-         document.getElementById("product-price").innerHTML = object.price;
+         document.getElementById("product-price").innerHTML = object.priceIDR;
          document.getElementById("product-seller").innerHTML = object.seller.fullName;
          modal[0].style.display ="flex";
      }

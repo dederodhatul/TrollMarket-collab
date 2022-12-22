@@ -40,7 +40,6 @@ public class ShopController {
 
         Page<Product> products = productService.findAllProductContinue(page, name, cat, desc);
         int totalPage = productService.findAllProductContinue(page, name, cat, desc).getTotalPages();
-        System.out.println(totalPage);
 
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPage);
@@ -53,21 +52,13 @@ public class ShopController {
 
     @PostMapping("/addToCart")
     public String addToCart(@RequestParam(defaultValue = "1") Integer page,
-                            @RequestParam(value = "name", required = false) String name,
-                            @RequestParam(value = "cat", required = false) String cat,
-                            @RequestParam(value= "desc", required = false) String desc,
                             Model model, @RequestParam("productID") Long id,
                             @Valid @ModelAttribute("cart") CartDTO cart,
                             BindingResult bindingresult, Authentication authentication){
 
-        name = name == null ? "" : name;
-        cat = cat == null ? "" : cat;
-        desc = desc == null ? "" : desc;
-
         if(bindingresult.hasErrors()){
-            Page<Product> products = productService.findAllProductContinue(page, name, cat, desc);
-            int totalPage = productService.findAllProductContinue(page, name, cat, desc).getTotalPages();
-            System.out.println(totalPage);
+            Page<Product> products = productService.findAllProductContinue(page, "", "", "");
+            int totalPage = productService.findAllProductContinue(page, "", "", "").getTotalPages();
 
             model.addAttribute("currentPage", page);
             model.addAttribute("totalPages", totalPage);

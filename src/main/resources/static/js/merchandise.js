@@ -1,13 +1,16 @@
-var infoMerchand = document.querySelectorAll(".info")
+var modal = document.querySelector(".modal")
 
-document.addEventListener('DOMContentLoaded',function(){
-   for (let i = 0; i < infoMerchand.length; i++) {
-       document.getElementById("form-info-"+i).style.visibility = "hidden";
-   }
-   for(let i = 0; i < infoMerchand.length; i++){
-       document.getElementById("btn-info-"+i).addEventListener('click', function(e){
-                  document.getElementById("form-info-"+i).style.visibility = "visible";
-              })
-   }
-
-})
+function fetchInfoProduct(id){
+    var request = new XMLHttpRequest();
+     request.open("GET","/troll-market/merchandise/infoProduct?id="+id);
+     request.send();
+     request.onload = ()=>{
+         var object = JSON.parse(request.response);
+         document.getElementById("product-name").innerHTML = object.name;
+         document.getElementById("product-category").innerHTML = object.category;
+         document.getElementById("product-description").innerHTML = object.description;
+         document.getElementById("product-price").innerHTML = object.priceIDR;
+         document.getElementById("product-discontinue").innerHTML = object.status;
+         modal.style.display ="flex";
+     }
+}

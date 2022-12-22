@@ -1,5 +1,4 @@
 package com.trollmarket.service;
-
 import com.trollmarket.dao.ShipmentRepository;
 import com.trollmarket.dto.shipment.UpsertShipmentDTO;
 import com.trollmarket.entity.Shipment;
@@ -17,6 +16,7 @@ public class ShipmentServiceImpl implements ShipmentService{
 
     @Autowired
     ShipmentRepository shipmentRepository;
+
 
     private final int rowsInPage = 5;
 
