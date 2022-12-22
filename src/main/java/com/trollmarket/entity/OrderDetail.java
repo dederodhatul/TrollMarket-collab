@@ -14,10 +14,12 @@ public class OrderDetail {
     private Long id;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "OrderID")
     private Order order;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "ProductID")
     private Product product;
 
@@ -26,7 +28,7 @@ public class OrderDetail {
     @JoinColumn(name = "ShipmentID")
     private Shipment shipment;
 
-    @Column(name = "Quantity")
+    @Column(name = "Quantity", columnDefinition = "default 1")
     private Integer quantity;
 
     @Column(name = "SubTotal")
