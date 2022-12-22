@@ -2,6 +2,8 @@ package com.trollmarket.controller;
 
 
 import com.trollmarket.dto.profile.TopupDTO;
+import com.trollmarket.entity.Order;
+import com.trollmarket.entity.OrderDetail;
 import com.trollmarket.service.BuyerService;
 import com.trollmarket.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -32,8 +35,10 @@ public class ProfileController {
             if(auth.toLowerCase().equals("buyer")){
                 model.addAttribute("topup",new TopupDTO());
                 model.addAttribute("user",buyerService.findProfilByUsername(authentication.getName()));
+                model.addAttribute("transactions", buyerService.findAllTransactionBuyer(authentication.getName()));
             }else{
                 model.addAttribute("user",sellerService.findProfilByUsername(authentication.getName()));
+                model.addAttribute("transactions", sellerService.findAllTransactionSeller(authentication.getName()));
             }
         });
         return "profile/profile-index";

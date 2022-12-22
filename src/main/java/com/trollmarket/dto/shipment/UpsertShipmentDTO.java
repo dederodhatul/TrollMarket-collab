@@ -13,7 +13,6 @@ public class UpsertShipmentDTO {
     private BigDecimal price;
     private Boolean service;
 
-
     public UpsertShipmentDTO(){}
 
     public UpsertShipmentDTO(Long id, String name, BigDecimal price, Boolean service) {

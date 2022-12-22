@@ -1,5 +1,6 @@
 package com.trollmarket.dao;
 
+import com.trollmarket.entity.Cart;
 import com.trollmarket.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,4 +37,12 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     )
     Long countOrderProduct(@Param("id") Long id);
 
+    @Query("""
+           SELECT COUNT(pro)
+           FROM Product AS pro
+           INNER JOIN Cart AS c ON pro.id = c.product.id
+           WHERE pro.id = :idProduct AND c.shipment.id = :idShipment 
+           """)
+    Long countCartProduct(@Param("idProduct") Long idProduct, @Param("idShipment") Long idShipment);
+    
 }

@@ -7,11 +7,13 @@ import com.trollmarket.dto.profile.GetProfilDTO;
 import com.trollmarket.dto.profile.TopupDTO;
 import com.trollmarket.entity.Account;
 import com.trollmarket.entity.Buyer;
+import com.trollmarket.entity.OrderDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class BuyerServiceImpl implements BuyerService {
@@ -55,4 +57,11 @@ public class BuyerServiceImpl implements BuyerService {
         buyerRepository.save(buyer);
 
     }
+
+    @Override
+    public List<OrderDetail> findAllTransactionBuyer(String username) {
+        Buyer buyer = findBuyerByUsername(username);
+        return buyerRepository.findAllTransactionBuyer(buyer.getId());
+    }
+
 }
