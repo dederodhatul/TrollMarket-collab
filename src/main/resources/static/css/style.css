@@ -1,5 +1,6 @@
 body,html{
     height:100%;
+    font-family: "OpenSans", "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 .container{
     margin: auto;
@@ -22,10 +23,28 @@ header,
     padding: 10px;
 }
 
+textarea {
+    width: 240px;
+    height: 80px;
+    resize: none;
+}
+
 .button{
     padding: 5px;
     border-radius: 2px;
-    background-color: grey;
+    background-color: #DFD0C0;
+}
+
+.button:hover
+, .btn-action:hover{
+    background-color: #181818;
+    color: white
+}
+
+.button:active
+, .btn-action:active{
+    background-color: #3A4F7A;
+    color: white;
 }
 
 
@@ -34,10 +53,8 @@ header,
     border-radius: 2px;
     background-color: #cccccc;
     opacity:0.33;
-    pointer-events:none;
-    cursor:default;
+    pointer-events: none;
 }
-
 
 a{
     color: black;
@@ -54,6 +71,10 @@ a{
 
 .title{
     border: 1px solid black;
+}
+
+.title > h3{
+    margin-left: 20px;
 }
 
 .wrap{
@@ -91,6 +112,10 @@ table tr{
     padding: 10px;
 }
 
+tbody tr{
+    height: 40px;
+}
+
 table tbody tr:nth-child(odd){
     background-color: #ffffff;
 }
@@ -107,12 +132,15 @@ h3{
 .btn-action{
     font-size : 13px;
     background-color: grey;
+    padding: 6px;
     margin-top: 7px;
 }
+
 .button-disable-merchandise{
     font-size : 13px;
     background-color: grey;
     opacity:0.33;
+    padding: 6px;
     pointer-events:none;
     cursor:default;
     margin-top: 7px;
@@ -148,8 +176,7 @@ h3{
 
 .action{
     display: flex;
-    border: 1px solid black;
-    action: 100px;
+    width: 200px;
 }
 
 .btn-act{
