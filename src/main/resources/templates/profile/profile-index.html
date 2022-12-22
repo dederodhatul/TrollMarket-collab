@@ -77,7 +77,8 @@
                         <td th:text="${tr.product.getName()}"></td>
                         <td th:text="${tr.quantity}"></td>
                         <td th:text="${tr.shipment.getName()}"></td>
-                        <td th:text="${tr.priceFormat()}"></td>
+                        <td sec:authorize="hasAuthority('Buyer')" th:text="${tr.priceFormat()}"></td>
+                        <td sec:authorize="hasAuthority('Seller')" th:text="${tr.netIncomeFormat()}"></td>
                     </tr>
                 </table>
             </div>
