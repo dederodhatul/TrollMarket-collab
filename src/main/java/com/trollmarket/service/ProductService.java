@@ -23,8 +23,6 @@ public interface ProductService {
 
     Boolean isOrder(Long id);
 
-    void productOrder(Product product);
-
     void orderedProduct(String username);
     Page<Product> findAllProductBySeller(String username,Integer page);
 

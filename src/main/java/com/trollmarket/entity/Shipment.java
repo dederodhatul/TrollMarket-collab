@@ -1,6 +1,7 @@
 package com.trollmarket.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.IdentityHashMap;
 
@@ -14,6 +15,7 @@ public class Shipment {
     private Long id;
 
     @Column(name = "Name")
+    @NotNull
     private String name;
 
     @Column(name = "Price")

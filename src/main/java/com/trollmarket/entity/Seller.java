@@ -1,6 +1,7 @@
 package com.trollmarket.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity
@@ -12,6 +13,7 @@ public class Seller {
     private Long id;
 
     @Column(name="FirstName")
+    @NotNull
     private String firstName;
 
     @Column(name="LastName")
@@ -20,7 +22,7 @@ public class Seller {
     @Column(name = "Address")
     private String address;
 
-    @Column(name = "Balance")
+    @Column(name = "Balance", columnDefinition = "default 0")
     private BigDecimal balance;
 
     @OneToOne(cascade = CascadeType.ALL)

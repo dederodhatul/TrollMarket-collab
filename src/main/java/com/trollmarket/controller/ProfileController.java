@@ -7,6 +7,7 @@ import com.trollmarket.entity.OrderDetail;
 import com.trollmarket.service.BuyerService;
 import com.trollmarket.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Controller;
@@ -29,20 +30,33 @@ public class ProfileController {
     private BuyerService buyerService;
 
     @GetMapping("/index")
-    public String profile(Authentication authentication, Model model){
+    public String profile(@RequestParam(defaultValue = "1") Integer page,
+                          Authentication authentication, Model model){
+
         Set<String> authorities = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
-        authorities.stream().forEach(auth->{
-            if(auth.toLowerCase().equals("buyer")){
-                model.addAttribute("topup",new TopupDTO());
-                model.addAttribute("user",buyerService.findProfilByUsername(authentication.getName()));
-                model.addAttribute("transactions", buyerService.findAllTransactionBuyer(authentication.getName()));
-            }else{
-                model.addAttribute("user",sellerService.findProfilByUsername(authentication.getName()));
-                model.addAttribute("transactions", sellerService.findAllTransactionSeller(authentication.getName()));
+
+        authorities.stream().forEach(auth-> {
+            if (auth.toLowerCase().equals("buyer")) {
+                Page<OrderDetail> allTransactionBuyer = buyerService.findAllTransactionBuyer(page, authentication.getName());
+                int totalPageBuyer = allTransactionBuyer.getTotalPages();
+                model.addAttribute("topup", new TopupDTO());
+                model.addAttribute("user", buyerService.findProfilByUsername(authentication.getName()));
+                model.addAttribute("currentPage", page);
+                model.addAttribute("totalPages", totalPageBuyer);
+                model.addAttribute("transactions", allTransactionBuyer);
+            } else {
+                Page<OrderDetail> allTransactionSeller = sellerService.findAllTransactionSeller(page, authentication.getName());
+                int totalPageSeller = allTransactionSeller.getTotalPages();
+                model.addAttribute("user", sellerService.findProfilByUsername(authentication.getName()));
+                model.addAttribute("currentPage", page);
+                model.addAttribute("totalPages", totalPageSeller);
+                model.addAttribute("transactions", allTransactionSeller);
             }
         });
+
         return "profile/profile-index";
     }
+
     @PostMapping("/topup")
     private String topup(@Valid @ModelAttribute("topup") TopupDTO topupDTO, BindingResult bindingResult,
                          Authentication authentication,Model model){

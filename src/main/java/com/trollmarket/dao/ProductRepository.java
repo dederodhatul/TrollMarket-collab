@@ -38,12 +38,29 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Long countOrderProduct(@Param("id") Long id);
 
     @Query("""
-            SELECT COUNT(pro)
-            FROM Product AS pro
-                INNER JOIN Cart AS crt ON pro.id = crt.product.id
-            WHERE pro.id = :id
+           SELECT COUNT(pro)
+           FROM Product AS pro
+           INNER JOIN Cart AS c ON pro.id = c.product.id
+           WHERE pro.id = :idProduct AND c.shipment.id = :idShipment AND c.buyer.id = :idBuyer
+           """)
+    Long countTheSameProductsInCart(@Param("idProduct") Long idProduct, @Param("idShipment") Long idShipment, @Param("idBuyer") Long idBuyer);
+
+    @Query(
+            """
+            SELECT c
+            FROM Cart AS c 
+            INNER JOIN Product AS p ON c.product.id = p.id
+            WHERE c.product.id = :idProduct AND c.shipment.id = :idShipment AND c.buyer.id = :idBuyer 
             """
     )
+    Cart findCartTheSameProduct(@Param("idProduct") Long idProduct, @Param("idShipment") Long idShipment, @Param("idBuyer") Long idBuyer);
+
+    @Query("""
+        SELECT COUNT(pro)
+                FROM Product AS pro
+                    INNER JOIN Cart AS crt ON pro.id = crt.product.id
+                WHERE pro.id = :id
+        """)
     Long countCartProduct(@Param("id") Long id);
 
     @Query("""

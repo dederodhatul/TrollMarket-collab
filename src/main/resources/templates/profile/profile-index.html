@@ -77,9 +77,21 @@
                         <td th:text="${tr.product.getName()}"></td>
                         <td th:text="${tr.quantity}"></td>
                         <td th:text="${tr.shipment.getName()}"></td>
-                        <td th:text="${tr.priceFormat()}"></td>
+                        <td sec:authorize="hasAuthority('Buyer')" th:text="${tr.priceFormat()}"></td>
+                        <td sec:authorize="hasAuthority('Seller')" th:text="${tr.netIncomeFormat()}"></td>
                     </tr>
                 </table>
+            </div>
+
+            <div th:if="${totalPages} > 1">
+                <div class="pagination">
+                    <div th:text="|page ${currentPage} of ${totalPages}|"></div>
+                    <div>
+                        <a th:each="loop:${#numbers.sequence(1,totalPages)}"
+                           th:href="@{/profile/index(page=${loop})}"
+                           th:text="${loop}"></a>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

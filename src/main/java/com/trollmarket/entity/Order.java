@@ -3,6 +3,7 @@ package com.trollmarket.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -16,11 +17,13 @@ public class Order {
     private Long id;
 
     @Column(name = "Date")
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
     @ManyToOne
     @JoinColumn(name = "BuyerID")
+    @NotNull
     private Buyer buyer;
 
     public Order(){}

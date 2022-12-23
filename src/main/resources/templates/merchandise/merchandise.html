@@ -76,12 +76,14 @@
                 </div>
             </div>
 
-            <div class="pagination">
-                <div th:text="|page ${currentPage} of ${totalPages}|"></div>
-                <div>
-                    <a th:each="loop:${#numbers.sequence(1,totalPages)}"
-                       th:href="@{/merchandise/index(page=${loop})}"
-                       th:text="${loop}"></a>
+            <div th:if = "${totalPages} > 1">
+                <div class="pagination">
+                    <div th:text="|page ${currentPage} of ${totalPages}|"></div>
+                    <div>
+                        <a th:each="loop:${#numbers.sequence(1,totalPages)}"
+                           th:href="@{/merchandise/index(page=${loop})}"
+                           th:text="${loop}"></a>
+                    </div>
                 </div>
             </div>
 

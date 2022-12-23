@@ -99,10 +99,6 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void productOrder(Product product) {
-        List<Product> products = findAllProduct();
-
-    }
     public void orderedProduct(String username) {
         Page<Product> productsPageable = productRepository.findAllProductBySeller(username,Pageable.unpaged());
         List<Product> products = productsPageable.getContent();

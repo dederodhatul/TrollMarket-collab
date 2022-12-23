@@ -8,6 +8,10 @@ import com.trollmarket.entity.Account;
 import com.trollmarket.entity.OrderDetail;
 import com.trollmarket.entity.Seller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +29,8 @@ public class SellerServiceImpl implements SellerService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    private final int rowsInPage = 5;
 
     @Override
     public void save(RegisterDTO registerDTO) {
@@ -54,8 +60,9 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
-    public List<OrderDetail> findAllTransactionSeller(String username) {
+    public Page<OrderDetail> findAllTransactionSeller(Integer page, String username) {
         Seller seller = sellerRepository.findByUsername(username);
-        return sellerRepository.findAllTransactionSeller(seller.getId());
+        Pageable pagination = PageRequest.of(page - 1, rowsInPage, Sort.by("id"));
+        return sellerRepository.findAllTransactionSeller(pagination, seller.getId());
     }
 }
