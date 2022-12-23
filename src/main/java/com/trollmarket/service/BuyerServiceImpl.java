@@ -71,4 +71,9 @@ public class BuyerServiceImpl implements BuyerService {
         return buyerRepository.findAllTransactionBuyer(pagination, buyer.getId());
     }
 
+    @Override
+    public List<Buyer> findAllBuyer() {
+        return buyerRepository.findAll();
+    }
+
 }

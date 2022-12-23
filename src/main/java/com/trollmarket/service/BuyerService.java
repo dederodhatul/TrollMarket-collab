@@ -22,4 +22,5 @@ public interface BuyerService {
 
     Page<OrderDetail> findAllTransactionBuyer(Integer page, String username);
 
+    List<Buyer> findAllBuyer();
 }
