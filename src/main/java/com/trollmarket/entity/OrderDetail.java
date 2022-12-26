@@ -100,6 +100,12 @@ public class OrderDetail {
         return indoFormat;
     }
 
+    public String netIncomeFormat(){
+        Locale indonesia = new Locale("id", "ID");
+        String indoFormat = NumberFormat.getCurrencyInstance(indonesia).format(this.subTotal.subtract(this.shipment.getPrice()));
+        return indoFormat;
+    }
+
     @Override
     public String toString() {
         return "OrderDetail{" +

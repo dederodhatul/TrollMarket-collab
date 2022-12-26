@@ -41,7 +41,7 @@
                         <td th:text="${cart.quantity}"></td>
                         <td th:text="${cart.shipment.getName()}"></td>
                         <td th:text="${cart.product.getSeller().getFullName()}"></td>
-                        <td th:text="'Rp ' + ${cart.totalPrice()}"></td>
+                        <td th:text="${cart.totalPrice()}"></td>
                     </tr>
                 </tbody>
             </table>

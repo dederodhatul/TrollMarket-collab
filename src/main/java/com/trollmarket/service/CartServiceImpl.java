@@ -61,11 +61,14 @@ public class CartServiceImpl implements CartService{
                 shipmentRepository.findById(cartDTO.getShipmentID()).get()
         );
 
-//        if(productRepository.countCartProduct(productID, cart.getShipment().getId()) > 0){
-//
-//        }
-
-        cartRepository.save(cart);
+        Cart findCart = productRepository.findCartTheSameProduct(productID, cart.getShipment().getId(), cart.getBuyer().getId());
+        if(findCart != null){
+            findCart.setQuantity(findCart.getQuantity() + cart.getQuantity());
+            findCart.totalPriceInBigDecimal().add(cart.totalPriceInBigDecimal());
+            cartRepository.save(findCart);
+        }else{
+            cartRepository.save(cart);
+        }
     }
 
     @Override
