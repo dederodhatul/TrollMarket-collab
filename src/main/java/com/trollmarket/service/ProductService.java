@@ -22,7 +22,7 @@ public interface ProductService {
     Page<Product> findAllProductContinue(int page, String name, String cat, String desc);
 
     Boolean isOrder(Long id);
-    
+
     void orderedProduct(String username);
     Page<Product> findAllProductBySeller(String username,Integer page);
 

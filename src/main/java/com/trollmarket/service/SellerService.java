@@ -4,6 +4,7 @@ import com.trollmarket.dto.account.RegisterDTO;
 import com.trollmarket.dto.profile.GetProfilDTO;
 import com.trollmarket.entity.OrderDetail;
 import com.trollmarket.entity.Seller;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -16,6 +17,6 @@ public interface SellerService {
 
     GetProfilDTO findProfilByUsername(String username);
 
-    List<OrderDetail> findAllTransactionSeller(String username);
+    Page<OrderDetail> findAllTransactionSeller(Integer page, String username);
 
 }
