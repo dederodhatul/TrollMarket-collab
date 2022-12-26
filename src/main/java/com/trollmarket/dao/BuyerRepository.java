@@ -4,6 +4,8 @@ import com.trollmarket.dto.profile.GetProfilDTO;
 import com.trollmarket.entity.Buyer;
 import com.trollmarket.entity.OrderDetail;
 import com.trollmarket.entity.Seller;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -47,6 +49,6 @@ public interface BuyerRepository extends JpaRepository<Buyer,Long> {
             WHERE ord.buyer.id = :id
             """
     )
-    List<OrderDetail> findAllTransactionBuyer(@Param("id") Long id);
+    Page<OrderDetail> findAllTransactionBuyer(Pageable pageable, @Param("id") Long id);
 
 }

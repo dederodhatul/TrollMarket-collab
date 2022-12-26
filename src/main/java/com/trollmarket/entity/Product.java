@@ -1,6 +1,7 @@
 package com.trollmarket.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -16,12 +17,15 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "SellerID")
+    @NotNull
     private Seller seller;
 
     @Column(name = "Name")
+    @NotNull
     private String name;
 
     @Column(name = "Category")
+    @NotNull
     private String category;
 
     @Column(name = "Description")

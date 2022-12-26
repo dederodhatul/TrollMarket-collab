@@ -98,11 +98,11 @@ public class ProductServiceImpl implements ProductService{
         return totalOrder > 0;
     }
 
-
     @Override
     public void orderedProduct(String username) {
         Page<Product> productsPageable = productRepository.findAllProductBySeller(username,Pageable.unpaged());
         List<Product> products = productsPageable.getContent();
+
         for(Product pro : products){
             if(productRepository.countOrderProduct(pro.getId()) > 0 ||
                 productRepository.countCartProduct(pro.getId()) > 0 ){

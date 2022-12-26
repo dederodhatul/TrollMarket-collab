@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <header th:replace="~{index :: header}"></header>
+        <nav th:replace="~{index :: nav}"></nav>
+
+        <main>
+            <div class="title">
+                <h3>History</h3>
+            </div>
+
+            <div class="content">
+                <div class="main-wrap">
+                    <form method="post" th:action="@{/history/index}">
+                        <div class="wrap">
+
+                            <label>Seller</label>
+                            <select name="sellerName">
+                                <option th:each="seller : ${sellers}" th:value="${seller.firstName}" th:text="${seller.getFullName()}"></option>
+                            </select>
+                        </div>
+
+                        <div class="wrap">
+                            <label>Buyer</label>
+                            <select name="buyerName">
+                                <option th:each="buyer : ${buyers}" th:value="${buyer.firstName}" th:text="${buyer.getFullName()}"></option>
+                            </select>
+                        </div>
+
+                        <div class="search-btn">
+                            <input type="submit" value="Search">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="transaction">
+                    <table>
+                        <thead>
+                            <th>Date</th>
+                            <th>Seller</th>
+                            <th>Buyer</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Shipment</th>
+                            <th>Total Price</th>
+                        </thead>
+                        <tbody>
+                            <tr th:each="ordet : ${transactions}">
+                                <td th:text="${ordet.order.getDate()}"></td>
+                                <td th:text="${ordet.product.getSeller().getFullName()}"></td>
+                                <td th:text="${ordet.order.getBuyer().getFullName()}"></td>
+                                <td th:text="${ordet.product.getName()}"></td>
+                                <td th:text="${ordet.quantity}"></td>
+                                <td th:text="${ordet.shipment.getName()}"></td>
+                                <td th:text="${ordet.priceFormat()}"></td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                    <div th:if = "${totalPages} > 1">
+                        <div class="pagination">
+                            <div th:text="|page ${currentPage} of ${totalPages}|"></div>
+                            <div>
+                                <a th:each="loop:${#numbers.sequence(1,totalPages)}"
+                                   th:href="@{/history/index(sellerName=${searchSeller},buyerName=${searchBuyer},
+                                   page=${loop})}"
+                                   th:text="${loop}"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+
+
+    </div>
+
+</body>
+</html>
