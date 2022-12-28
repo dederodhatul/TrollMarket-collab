@@ -43,6 +43,8 @@ public class ProductServiceImpl implements ProductService{
         if(dto.getId() != null &&
                 productRepository.findProductSellerById(seller.getId(), dto.getId()) == 0){
                 throw new RuntimeException("Seller " + seller.getFullName() + " tidak memiliki produk dengan id " + dto.getId());
+        }else if(findById(dto.getId()).getOrder() == true){
+                throw new RuntimeException("Produk dengan id " + dto.getId() + " ini tidak bisa di edit karena sudah di transaksikan!");
         }
 
         Product product = new Product(

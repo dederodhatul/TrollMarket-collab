@@ -52,6 +52,13 @@ public class RestMerchandiseController {
                                                   Authentication authentication) {
 
         productDTO.setId(id);
+
+        ProductDTO proDTO = productService.findProductDTOById(id);
+
+        if(productDTO.getDiscontinue() != null){
+            productDTO.setDiscontinue(proDTO.getDiscontinue());
+        }
+
         productService.save(productDTO, authentication.getName());
         return new ResponseEntity<>("success edited product!", HttpStatus.OK);
     }
@@ -60,12 +67,28 @@ public class RestMerchandiseController {
     public ResponseEntity<String> deleteProductById(@PathVariable("id") Long id,
                                                     Authentication authentication){
         if(productService.CountProductSellerById(sellerService.findSellerByUsername(authentication.getName()).getId(), id) == 0){
-            throw new ObjectNotFound("seller " + authentication.getName() + "tidak memiliki produk dengan id "+id);
+            throw new ObjectNotFound("Seller " + authentication.getName() + " tidak memiliki produk dengan id "+id);
+        }else if(productService.findById(id).getOrder() == true){
+            throw new RuntimeException("Produk dengan id " + id + "tidak dapat dihapus karena telah ditransaksikan!");
         }
 
         productService.delete(id);
         return new ResponseEntity<>("success deleted product!", HttpStatus.OK);
     }
 
+    @GetMapping("/discontinue/{id}")
+    public ResponseEntity<String> setDiscontinueProduct(@PathVariable("id") Long id,
+                                                        Authentication authentication){
+
+        ProductDTO dto = productService.findProductDTOById(id);
+        if(dto.getDiscontinue() == true){
+            throw new RuntimeException("product has been discontinued!");
+        }else{
+            dto.setDiscontinue(true);
+            productService.save(dto, authentication.getName());
+        }
+
+        return new ResponseEntity<>("success discontinue this product!", HttpStatus.OK);
+    }
 
 }
